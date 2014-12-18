@@ -1,0 +1,34 @@
+qcm_admin_user_list:
+    pattern: /
+    defaults:
+        _controller: qcm_core.controller.user:indexAction
+        _sylius:
+            template: QcmAdminBundle:User:list.html.twig
+
+qcm_admin_user_add:
+    pattern: /add
+    defaults:
+        _controller: qcm_core.controller.user:createAction
+        _sylius:
+            template: QcmAdminBundle:User:create.html.twig
+            redirect:
+                route: qcm_admin_user_show
+                parameters: { id: resource.id }
+
+qcm_admin_user_show:
+    pattern: /show/{id}
+    defaults:
+        _controller: qcm_core.controller.user:showAction
+        _sylius:
+            template: QcmAdminBundle:User:show.html.twig
+
+qcm_admin_user_edit:
+    pattern: /edit/{id}
+    defaults:
+        _controller: qcm_core.controller.user:updateAction
+        _sylius:
+            template: QcmAdminBundle:User:update.html.twig
+            form: qcm_core_user_profile
+            redirect:
+                route: qcm_admin_user_show
+                parameters: { id: resource.id }

@@ -1,0 +1,16 @@
+qcm_admin:
+    label:
+        choose_file: Choisissez un fichier
+
+    title:
+        users: Utilisateurs
+        categories: Catégories
+        questions: Questions
+        answers: Réponses
+
+    empty:
+        user: Aucun utilisateur pour le moment
+
+    user:
+        list: Liste des utilisateurs
+        show: 'Utilisateur "%username%"'

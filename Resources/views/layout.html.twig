@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>{% block title %}{% endblock %}</title>
+        {% block meta %}{% endblock %}
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('bundles/qcmcore/css/bootstrap.min.css') }}" />
+            <link rel="stylesheet" href="{{ asset('bundles/qcmcore/css/dashboard.css') }}" />
+            <link rel="stylesheet" href="{{ asset('bundles/qcmadmin/css/admin.css') }}" />
+        {% endblock %}
+    </head>
+    <body>
+        {% import 'QcmCoreBundle:Macros:actions.html.twig' as actions %}
+
+        {% if form is defined %}
+            {% form_theme form '@QcmAdmin/forms.html.twig' %}
+        {% endif %}
+
+        {% block container %}
+            {% block nav %}
+                <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                            <a class="navbar-brand" href="javascript:void(0);">{{ app.user.username|capitalize }}</a>
+                        </div>
+                        <div id="navbar" class="navbar-collapse collapse">
+                            <ul class="nav navbar-nav navbar-left">
+                                <li><a href="{{ path('qcm_admin_user_list') }}">{{ 'qcm_admin.title.users'|trans }}</a></li>
+                                <li><a href="#">{{ 'qcm_admin.title.categories'|trans }}</a></li>
+                                <li><a href="#">{{ 'qcm_admin.title.questions'|trans }}</a></li>
+                                <li><a href="#">{{ 'qcm_admin.title.answers'|trans }}</a></li>
+                                <li><a href="{{ path('qcm_core_security_logout') }}">{{ 'qcm_core.label.logout'|trans }}</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            {% endblock %}
+            <div class="container">
+                <div class="row">
+                    {% block flashMessages %}
+                        {% for type, messages in app.session.flashbag.all() %}
+                            {% for key, message in messages %}
+                                <div class="alert bg-{{ type }} fade in">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                    <p class="text-center">{{ message|trans }}</p>
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
+                    {% endblock %}
+
+                    <div class="main">
+                        {% block content %}{% endblock %}
+                    </div>
+                    {% block footer %}{% endblock %}
+                </div>
+            </div>
+        {% endblock %}
+        {% block javascripts %}
+            <script type="text/javascript" src="{{ asset('bundles/qcmcore/js/jquery-2.1.1.min.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/qcmcore/js/bootstrap.min.js') }}"></script>
+        {% endblock %}
+    </body>
+</html>

@@ -1,0 +1,13 @@
+{% extends 'QcmAdminBundle::layout.html.twig' %}
+
+{% block title %}{{ 'qcm_admin.user.update'|trans({ '%username%': user.username }) }}{% endblock %}
+
+{% block content %}
+    {{ actions.title('qcm_admin.user.list'|trans, 'glyphicon-user') }}
+
+    <form class="form-horizontal col-sm-12 text-center" novalidate action="{{ path('qcm_admin_user_edit', { id : user.id }) }}" {{ form_enctype(form) }} method="POST">
+        {{ form_widget(form) }}
+        {{ actions.cancel(path('qcm_admin_user_list')) }}
+        {{ actions.submit() }}
+    </form>
+{% endblock %}

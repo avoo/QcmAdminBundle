@@ -1,0 +1,3 @@
+qcm_admin_user:
+    prefix: /user
+    resource: @QcmAdminBundle/Resources/config/routing/user.yml

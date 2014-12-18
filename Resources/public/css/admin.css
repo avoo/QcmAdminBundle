@@ -1,0 +1,20 @@
+.popover-title {
+    margin-bottom: 10px;
+}
+
+.table {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.form-horizontal .has-error .control-label {
+    text-align: left;
+}
+
+.form-horizontal .form-group.has-error {
+    margin-bottom: 0;
+}
+
+.form-horizontal input[type=checkbox] {
+    display: inherit;
+}
