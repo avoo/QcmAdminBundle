@@ -5,11 +5,6 @@
 
 {% block content %}
     {{ actions.title('qcm_admin.category.list'|trans, 'glyphicon-th') }}
-
-    <div class="actions-menu">
-        {{ actions.add(path('qcm_admin_category_add')) }}
-    </div>
-
     {{ list(categories) }}
 
     <div class="actions-menu">

@@ -1,0 +1,13 @@
+{% extends 'QcmAdminBundle::layout.html.twig' %}
+
+{% block title %}{{ 'qcm_admin.question.add'|trans }}{% endblock %}
+
+{% block content %}
+    {{ actions.title('qcm_admin.question.add'|trans, 'glyphicon-question-sign') }}
+
+    <form class="form-horizontal col-sm-12 text-center" novalidate action="{{ path('qcm_admin_question_add') }}" {{ form_enctype(form) }} method="POST">
+        {{ form_widget(form) }}
+        {{ actions.cancel(path('qcm_admin_question_list')) }}
+        {{ actions.submit() }}
+    </form>
+{% endblock %}

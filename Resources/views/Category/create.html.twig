@@ -3,7 +3,7 @@
 {% block title %}{{ 'qcm_admin.category.add'|trans }}{% endblock %}
 
 {% block content %}
-    {{ actions.title('qcm_admin.category.list'|trans, 'glyphicon-th') }}
+    {{ actions.title('qcm_admin.category.add'|trans, 'glyphicon-th') }}
 
     <form class="form-horizontal col-sm-12 text-center" novalidate action="{{ path('qcm_admin_category_add') }}" {{ form_enctype(form) }} method="POST">
         {{ form_widget(form) }}

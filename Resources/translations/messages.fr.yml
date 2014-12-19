@@ -12,6 +12,7 @@ qcm_admin:
     empty:
         user: Aucun utilisateur pour le moment
         category: Aucune catégorie pour le moment
+        question: Aucune question pour le moment
 
     user:
         list: Liste des utilisateurs
@@ -24,3 +25,9 @@ qcm_admin:
         add: Ajouter une catégorie
         show: 'Catégorie "%name%"'
         update: 'Modification de "%name%"'
+
+    question:
+        list: Liste des questions
+        add: Ajouter une question
+        show: 'Voir la question'
+        update: 'Modification de la question'

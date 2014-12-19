@@ -1,0 +1,13 @@
+{% extends 'QcmAdminBundle::layout.html.twig' %}
+{% from '@QcmAdmin/Question/macros.html.twig' import list %}
+
+{% block title %}{{ 'qcm_admin.question.list'|trans }}{% endblock %}
+
+{% block content %}
+    {{ actions.title('qcm_admin.question.list'|trans, 'glyphicon-question-sign') }}
+    {{ list(questions) }}
+
+    <div class="actions-menu">
+        {{ actions.add(path('qcm_admin_question_add')) }}
+    </div>
+{% endblock %}

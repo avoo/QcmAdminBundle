@@ -16,7 +16,7 @@
             <tr>
                 <td>{{ user.username }}</td>
                 <td>{{ user.email }}</td>
-                <td>{{ 'qcm_core.user.enabled'|transchoice(user.enabled) }}</td>
+                <td>{{ 'qcm_core.enabled'|transchoice(user.enabled) }}</td>
                 <td>
                     <a href="{{ path('qcm_admin_user_show', { id : user.id }) }}"><img src="{{ asset('bundles/qcmadmin/images/list.png') }}" title="{{ 'qcm_core.button.show'|trans }}" /></a>
                     <a href="{{ path('qcm_admin_user_edit', { id : user.id }) }}"><img src="{{ asset('bundles/qcmadmin/images/edit.png') }}" title="{{ 'qcm_core.button.edit'|trans }}" /></a>
@@ -42,7 +42,7 @@
             <tr>
                 <td>{{ user.username }}</td>
                 <td>{{ user.email }}</td>
-                <td>{{ 'qcm_core.user.enabled'|transchoice(user.enabled) }}</td>
+                <td>{{ 'qcm_core.enabled'|transchoice(user.enabled) }}</td>
             </tr>
         </tbody>
     </table>

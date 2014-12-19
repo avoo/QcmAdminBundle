@@ -3,7 +3,7 @@
 {% block title %}{{ 'qcm_admin.user.add'|trans }}{% endblock %}
 
 {% block content %}
-    {{ actions.title('qcm_admin.user.list'|trans, 'glyphicon-user') }}
+    {{ actions.title('qcm_admin.user.add'|trans, 'glyphicon-user') }}
 
     <form class="form-horizontal col-sm-12 text-center" novalidate action="{{ path('qcm_admin_user_add') }}" {{ form_enctype(form) }} method="POST">
         {{ form_widget(form) }}
