@@ -5,3 +5,7 @@ qcm_admin_user:
 qcm_admin_category:
     prefix: /category
     resource: @QcmAdminBundle/Resources/config/routing/category.yml
+
+qcm_admin_question:
+    prefix: /question
+    resource: @QcmAdminBundle/Resources/config/routing/question.yml

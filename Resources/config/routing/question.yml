@@ -1,0 +1,33 @@
+qcm_admin_question_list:
+    pattern: /
+    defaults:
+        _controller: qcm_core.controller.question:indexAction
+        _sylius:
+            template: QcmAdminBundle:Question:list.html.twig
+
+qcm_admin_question_add:
+    pattern: /add
+    defaults:
+        _controller: qcm_core.controller.question:createAction
+        _sylius:
+            template: QcmAdminBundle:Question:create.html.twig
+            redirect:
+                route: qcm_admin_question_show
+                parameters: { id: resource.id }
+
+qcm_admin_question_show:
+    pattern: /show/{id}
+    defaults:
+        _controller: qcm_core.controller.question:showAction
+        _sylius:
+            template: QcmAdminBundle:Question:show.html.twig
+
+qcm_admin_question_edit:
+    pattern: /edit/{id}
+    defaults:
+        _controller: qcm_core.controller.question:updateAction
+        _sylius:
+            template: QcmAdminBundle:Question:update.html.twig
+            redirect:
+                route: qcm_admin_question_show
+                parameters: { id: resource.id }
