@@ -1,3 +1,7 @@
 qcm_admin_user:
     prefix: /user
     resource: @QcmAdminBundle/Resources/config/routing/user.yml
+
+qcm_admin_category:
+    prefix: /category
+    resource: @QcmAdminBundle/Resources/config/routing/category.yml

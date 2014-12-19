@@ -4,13 +4,23 @@ qcm_admin:
 
     title:
         users: Utilisateurs
+        questionnaires: Questionnaires
         categories: Catégories
         questions: Questions
         answers: Réponses
 
     empty:
         user: Aucun utilisateur pour le moment
+        category: Aucune catégorie pour le moment
 
     user:
         list: Liste des utilisateurs
+        add: Ajouter un utilisateur
         show: 'Utilisateur "%username%"'
+        update: 'Modification de "%username%"'
+
+    category:
+        list: Liste des catégories
+        add: Ajouter une catégorie
+        show: 'Catégorie "%name%"'
+        update: 'Modification de "%name%"'

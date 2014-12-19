@@ -18,6 +18,7 @@
                 <td>{{ user.email }}</td>
                 <td>{{ 'qcm_core.user.enabled'|transchoice(user.enabled) }}</td>
                 <td>
+                    <a href="{{ path('qcm_admin_user_show', { id : user.id }) }}"><img src="{{ asset('bundles/qcmadmin/images/list.png') }}" title="{{ 'qcm_core.button.show'|trans }}" /></a>
                     <a href="{{ path('qcm_admin_user_edit', { id : user.id }) }}"><img src="{{ asset('bundles/qcmadmin/images/edit.png') }}" title="{{ 'qcm_core.button.edit'|trans }}" /></a>
                     <a href="#"><img src="{{ asset('bundles/qcmadmin/images/delete.png') }}" title="{{ 'qcm_core.button.delete'|trans }}" /></a>
                 </td>

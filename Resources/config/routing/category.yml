@@ -1,0 +1,33 @@
+qcm_admin_category_list:
+    pattern: /
+    defaults:
+        _controller: qcm_core.controller.category:indexAction
+        _sylius:
+            template: QcmAdminBundle:Category:list.html.twig
+
+qcm_admin_category_add:
+    pattern: /add
+    defaults:
+        _controller: qcm_core.controller.category:createAction
+        _sylius:
+            template: QcmAdminBundle:Category:create.html.twig
+            redirect:
+                route: qcm_admin_category_show
+                parameters: { id: resource.id }
+
+qcm_admin_category_show:
+    pattern: /show/{id}
+    defaults:
+        _controller: qcm_core.controller.category:showAction
+        _sylius:
+            template: QcmAdminBundle:Category:show.html.twig
+
+qcm_admin_category_edit:
+    pattern: /edit/{id}
+    defaults:
+        _controller: qcm_core.controller.category:updateAction
+        _sylius:
+            template: QcmAdminBundle:Category:update.html.twig
+            redirect:
+                route: qcm_admin_category_show
+                parameters: { id: resource.id }

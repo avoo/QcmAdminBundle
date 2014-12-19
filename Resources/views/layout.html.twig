@@ -27,9 +27,14 @@
                         <div id="navbar" class="navbar-collapse collapse">
                             <ul class="nav navbar-nav navbar-left">
                                 <li><a href="{{ path('qcm_admin_user_list') }}">{{ 'qcm_admin.title.users'|trans }}</a></li>
-                                <li><a href="#">{{ 'qcm_admin.title.categories'|trans }}</a></li>
-                                <li><a href="#">{{ 'qcm_admin.title.questions'|trans }}</a></li>
-                                <li><a href="#">{{ 'qcm_admin.title.answers'|trans }}</a></li>
+                                <li class="menu-item dropdown">
+                                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">{{ 'qcm_admin.title.questionnaires'|trans }} <b class="caret"></b></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="{{ path('qcm_admin_category_list') }}">{{ 'qcm_admin.title.categories'|trans }}</a></li>
+                                        <li><a href="#">{{ 'qcm_admin.title.questions'|trans }}</a></li>
+                                        <li><a href="#">{{ 'qcm_admin.title.answers'|trans }}</a></li>
+                                    </ul>
+                                </li>
                                 <li><a href="{{ path('qcm_core_security_logout') }}">{{ 'qcm_core.label.logout'|trans }}</a></li>
                             </ul>
                         </div>

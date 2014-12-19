@@ -18,3 +18,17 @@
 .form-horizontal input[type=checkbox] {
     display: inherit;
 }
+
+ul.nav li.dropdown:hover > ul.dropdown-menu {
+    display: block;
+}
+
+ul.nav .open>a, ul.nav .open>a:hover {
+    border-color: #d5d5d5;
+}
+
+ul.nav .dropdown-menu {
+    margin: 0;
+    border-top-color: transparent;
+    width: 100%;
+}

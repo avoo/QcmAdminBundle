@@ -1,0 +1,15 @@
+{% extends 'QcmAdminBundle::layout.html.twig' %}
+{% from '@QcmAdmin/Category/macros.html.twig' import show %}
+
+{% block title %}{{ 'qcm_admin.category.show'|trans({ '%name%' : category.name }) }}{% endblock %}
+
+{% block content %}
+    {{ actions.title('qcm_admin.category.show'|trans({ '%name%' : category.name }), 'glyphicon-th') }}
+
+    <div class="actions-menu">
+        {{ actions.cancel(path('qcm_admin_category_list'), 'qcm_core.button.return'|trans) }}
+        {{ actions.edit(path('qcm_admin_category_edit', {id: category.id})) }}
+    </div>
+
+    {{ show(category) }}
+{% endblock %}
