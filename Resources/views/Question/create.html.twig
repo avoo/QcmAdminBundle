@@ -5,9 +5,25 @@
 {% block content %}
     {{ actions.title('qcm_admin.question.add'|trans, 'glyphicon-question-sign') }}
 
-    <form class="form-horizontal col-sm-12 text-center" novalidate action="{{ path('qcm_admin_question_add') }}" {{ form_enctype(form) }} method="POST">
+    <form id="question_form" class="form-horizontal col-sm-12 text-center" novalidate action="{{ path('qcm_admin_question_add') }}" {{ form_enctype(form) }} method="POST" data-prototype="{{ form_widget(form.answers.vars.prototype)|e }}">
         {{ form_widget(form) }}
+        <div class="row">
+            <button type="button" class="btn btn-info" id="add-answer">Add answer</button>
+        </div>
+
+        <div id="answers_form"></div>
+
         {{ actions.cancel(path('qcm_admin_question_list')) }}
         {{ actions.submit() }}
     </form>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('bundles/qcmadmin/js/question.js') }}"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $.initAnswer();
+        });
+    </script>
 {% endblock %}

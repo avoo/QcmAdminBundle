@@ -1,13 +1,44 @@
 {% extends 'QcmAdminBundle::layout.html.twig' %}
 
-{% block title %}{{ 'qcm_admin.question.update'|trans({ '%name%': question.name }) }}{% endblock %}
+{% block title %}{{ 'qcm_admin.question.update'|trans }}{% endblock %}
 
 {% block content %}
-    {{ actions.title('qcm_admin.question.list'|trans, 'glyphicon-question-sign') }}
+    {{ actions.title('qcm_admin.question.update'|trans, 'glyphicon-question-sign') }}
 
-    <form class="form-horizontal col-sm-12 text-center" novalidate action="{{ path('qcm_admin_question_edit', { id : question.id }) }}" {{ form_enctype(form) }} method="POST">
-        {{ form_widget(form) }}
+    <form id="question_form" class="form-horizontal col-sm-12 text-center" novalidate action="{{ path('qcm_admin_question_edit', {id : question.id}) }}" {{ form_enctype(form) }} method="POST" data-prototype="{{ form_widget(form.answers.vars.prototype)|e }}">
+        {{ form_row(form.category) }}
+        {{ form_row(form.name) }}
+        {{ form_row(form.type) }}
+        {{ form_row(form.enabled) }}
+
+        <div class="form-group row">
+            <button type="button" class="btn btn-info" id="add-answer">Add answer</button>
+        </div>
+
+        <div id="answers_form">
+            {% for answer in form.answers %}
+                <div class="alert alert-danger" role="alert">
+                    <button type="button" class="close" data-dismiss="alert">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    {{ form_widget(answer) }}
+                </div>
+            {% endfor %}
+        </div>
+
         {{ actions.cancel(path('qcm_admin_question_list')) }}
         {{ actions.submit() }}
+        {{ form_rest(form) }}
     </form>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('bundles/qcmadmin/js/question.js') }}"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $.initAnswer();
+        });
+    </script>
 {% endblock %}
