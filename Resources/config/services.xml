@@ -8,5 +8,10 @@
         <service id="qcm_admin.base_type_extension" class="Qcm\Bundle\AdminBundle\Form\Extension\BaseTypeExtension">
             <tag name="form.type_extension" alias="form" />
         </service>
+
+        <service id="qcm_core.question.registration.listener" class="Qcm\Bundle\AdminBundle\Listener\QuestionListener">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <tag name="kernel.event_listener" event="qcm_core.question.pre_update" method="update" />
+        </service>
     </services>
 </container>
