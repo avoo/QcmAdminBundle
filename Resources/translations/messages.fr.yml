@@ -13,6 +13,7 @@ qcm_admin:
         user: Aucun utilisateur pour le moment
         category: Aucune catégorie pour le moment
         question: Aucune question pour le moment
+        answer: Aucune réponse pour le moment
 
     user:
         list: Liste des utilisateurs
@@ -31,3 +32,9 @@ qcm_admin:
         add: Ajouter une question
         show: 'Voir la question'
         update: 'Modification de la question'
+
+    answer:
+        list: Liste des réponses
+        add: Ajouter une réponse
+        show: 'Voir la réponse'
+        update: 'Modification de la réponse'

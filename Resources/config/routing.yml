@@ -1,11 +1,15 @@
-qcm_admin_user:
+qcm_admin_user_resource:
     prefix: /user
     resource: @QcmAdminBundle/Resources/config/routing/user.yml
 
-qcm_admin_category:
+qcm_admin_category_resource:
     prefix: /category
     resource: @QcmAdminBundle/Resources/config/routing/category.yml
 
-qcm_admin_question:
+qcm_admin_question_resource:
     prefix: /question
     resource: @QcmAdminBundle/Resources/config/routing/question.yml
+
+qcm_admin_answer_resource:
+    prefix: /answer
+    resource: @QcmAdminBundle/Resources/config/routing/answer.yml

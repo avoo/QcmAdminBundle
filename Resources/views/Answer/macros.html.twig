@@ -1,0 +1,53 @@
+{% macro list(answers) %}
+    {% import '@QcmCore/Macros/actions.html.twig' as actions %}
+    {% if answers|length == 0 %}
+        <div class="text-muted text-center">{{ 'qcm_admin.empty.answer'|trans }}</div>
+    {% else %}
+    <div class="actions-menu">
+        {{ actions.add(path('qcm_admin_answer_add')) }}
+    </div>
+    <table class="table table-striped table-bordered col-xs-6">
+        <thead>
+            <tr>
+                <th>{{ 'qcm_core.label.question'|trans }}</th>
+                <th>{{ 'qcm_core.label.value'|trans }}</th>
+                <th>{{ 'qcm_core.label.enabled'|trans }}</th>
+                <th>{{ 'qcm_core.label.actions'|trans }}</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for answer in answers %}
+            <tr>
+                <td>{{ answer.question.name }}</td>
+                <td>{{ answer.value }}</td>
+                <td>{{ 'qcm_core.enabled'|transchoice(answer.valid) }}</td>
+                <td>
+                    <a href="{{ path('qcm_admin_answer_show', { id : answer.id }) }}"><img src="{{ asset('bundles/qcmadmin/images/list.png') }}" title="{{ 'qcm_core.button.show'|trans }}" /></a>
+                    <a href="{{ path('qcm_admin_answer_edit', { id : answer.id }) }}"><img src="{{ asset('bundles/qcmadmin/images/edit.png') }}" title="{{ 'qcm_core.button.edit'|trans }}" /></a>
+                    <a href="#"><img src="{{ asset('bundles/qcmadmin/images/delete.png') }}" title="{{ 'qcm_core.button.delete'|trans }}" /></a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+{% endmacro %}
+
+{% macro show(answer) %}
+    <table class="table table-striped table-bordered col-xs-6">
+        <thead>
+        <tr>
+            <th>{{ 'qcm_core.label.question'|trans }}</th>
+            <th>{{ 'qcm_core.label.value'|trans }}</th>
+            <th>{{ 'qcm_core.label.enabled'|trans }}</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ answer.question.name }}</td>
+                <td>{{ answer.value }}</td>
+                <td>{{ 'qcm_core.enabled'|transchoice(answer.valid) }}</td>
+            </tr>
+        </tbody>
+    </table>
+{% endmacro %}

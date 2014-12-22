@@ -1,0 +1,15 @@
+{% extends 'QcmAdminBundle::layout.html.twig' %}
+{% from '@QcmAdmin/Answer/macros.html.twig' import show %}
+
+{% block title %}{{ 'qcm_admin.answer.show'|trans }}{% endblock %}
+
+{% block content %}
+    {{ actions.title('qcm_admin.answer.show'|trans, 'glyphicon-check') }}
+
+    <div class="actions-menu">
+        {{ actions.cancel(path('qcm_admin_answer_list'), 'qcm_core.button.return'|trans) }}
+        {{ actions.edit(path('qcm_admin_answer_edit', {id: answer.id})) }}
+    </div>
+
+    {{ show(answer) }}
+{% endblock %}
