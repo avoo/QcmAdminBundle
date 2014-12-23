@@ -3,7 +3,7 @@
 {% block title %}{{ 'qcm_admin.answer.update'|trans }}{% endblock %}
 
 {% block content %}
-    {{ actions.title('qcm_admin.answer.list'|trans, 'glyphicon-check') }}
+    {{ actions.title('qcm_admin.answer.update'|trans, 'glyphicon-check') }}
 
     <form class="form-horizontal col-sm-12 text-center" novalidate action="{{ path('qcm_admin_answer_edit', { id : answer.id }) }}" {{ form_enctype(form) }} method="POST">
         {{ form_widget(form) }}

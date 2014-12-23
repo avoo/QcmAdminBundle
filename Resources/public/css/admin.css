@@ -32,3 +32,7 @@ ul.nav .dropdown-menu {
     border-top-color: transparent;
     width: 100%;
 }
+
+.syntaxhighlighter {
+    position: inherit!important;
+}

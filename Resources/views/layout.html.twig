@@ -5,8 +5,10 @@
         <title>{% block title %}{% endblock %}</title>
         {% block meta %}{% endblock %}
         {% block stylesheets %}
-            <link rel="stylesheet" href="{{ asset('bundles/qcmcore/css/bootstrap.min.css') }}" />
             <link rel="stylesheet" href="{{ asset('bundles/qcmcore/css/dashboard.css') }}" />
+            <link rel="stylesheet" href="{{ asset('bundles/qcmcore/css/bootstrap.min.css') }}" />
+            <link rel="stylesheet" href="{{ asset('bundles/qcmadmin/css/shCore.css') }}" />
+            <link rel="stylesheet" href="{{ asset('bundles/qcmadmin/css/shThemeDefault.css') }}" />
             <link rel="stylesheet" href="{{ asset('bundles/qcmadmin/css/admin.css') }}" />
         {% endblock %}
     </head>
@@ -32,7 +34,6 @@
                                     <ul class="dropdown-menu">
                                         <li><a href="{{ path('qcm_admin_category_list') }}">{{ 'qcm_admin.title.categories'|trans }}</a></li>
                                         <li><a href="{{ path('qcm_admin_question_list') }}">{{ 'qcm_admin.title.questions'|trans }}</a></li>
-                                        <li><a href="{{ path('qcm_admin_answer_list') }}">{{ 'qcm_admin.title.answers'|trans }}</a></li>
                                     </ul>
                                 </li>
                                 <li><a href="{{ path('qcm_core_security_logout') }}">{{ 'qcm_core.label.logout'|trans }}</a></li>
@@ -64,6 +65,22 @@
         {% block javascripts %}
             <script type="text/javascript" src="{{ asset('bundles/qcmcore/js/jquery-2.1.1.min.js') }}"></script>
             <script type="text/javascript" src="{{ asset('bundles/qcmcore/js/bootstrap.min.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/qcmadmin/js/shCore.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/qcmadmin/js/brush/shBrushAS3.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/qcmadmin/js/brush/shBrushCss.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/qcmadmin/js/brush/shBrushJScript.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/qcmadmin/js/brush/shBrushPowerShell.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/qcmadmin/js/brush/shBrushPhp.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/qcmadmin/js/brush/shBrushSql.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/qcmadmin/js/brush/shBrushXml.js') }}"></script>
+
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    SyntaxHighlighter.config.clipboardSwf = '{{ asset('bundles/qcmadmin/js/clipboard.swf') }}';
+                    SyntaxHighlighter.defaults.toolbar = false;
+                    SyntaxHighlighter.all();
+                });
+            </script>
         {% endblock %}
     </body>
 </html>

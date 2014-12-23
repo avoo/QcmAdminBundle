@@ -8,6 +8,11 @@
     <form id="question_form" class="form-horizontal col-sm-12 text-center" novalidate action="{{ path('qcm_admin_question_edit', {id : question.id}) }}" {{ form_enctype(form) }} method="POST" data-prototype="{{ form_widget(form.answers.vars.prototype)|e }}">
         {{ form_row(form.category) }}
         {{ form_row(form.name) }}
+
+        {% if form.level is defined %}
+            {{ form_row(form.level) }}
+        {% endif %}
+
         {{ form_row(form.type) }}
         {{ form_row(form.enabled) }}
 
@@ -38,7 +43,7 @@
     <script type="text/javascript" src="{{ asset('bundles/qcmadmin/js/question.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-            $.initAnswer();
+            $.initAnswer({{ qcm_configuration.answersMax }}, {{ qcm_configuration.strict }});
         });
     </script>
 {% endblock %}
