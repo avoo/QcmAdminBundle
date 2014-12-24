@@ -1,0 +1,33 @@
+qcm_admin_user_session_list:
+    pattern: /
+    defaults:
+        _controller: qcm_core.controller.user_session:indexAction
+        _sylius:
+            template: QcmAdminBundle:UserSession:list.html.twig
+
+qcm_admin_user_session_add:
+    pattern: /add/{user}
+    defaults:
+        _controller: qcm_core.controller.user_session:createAction
+        _sylius:
+            template: QcmAdminBundle:UserSession:create.html.twig
+            redirect:
+                route: qcm_admin_user_session_show
+                parameters: { user: resource.id }
+
+qcm_admin_user_session_show:
+    pattern: /show/{user}
+    defaults:
+        _controller: qcm_core.controller.user_session:showAction
+        _sylius:
+            template: QcmAdminBundle:UserSession:show.html.twig
+
+qcm_admin_user_session_edit:
+    pattern: /edit/{id}
+    defaults:
+        _controller: qcm_core.controller.user_session:updateAction
+        _sylius:
+            template: QcmAdminBundle:UserSession:update.html.twig
+            redirect:
+                route: qcm_admin_user_session_show
+                parameters: { user: resource.id }

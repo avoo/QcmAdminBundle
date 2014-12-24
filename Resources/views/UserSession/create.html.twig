@@ -1,0 +1,15 @@
+{% extends 'QcmAdminBundle::layout.html.twig' %}
+
+{% block title %}{{ 'qcm_admin.user_session.add'|trans }}{% endblock %}
+
+{% block content %}
+    {{ actions.title('qcm_admin.user_session.add'|trans, 'glyphicon-user') }}
+
+    <form class="form-horizontal col-sm-12 text-center" novalidate action="{{ path('qcm_admin_user_session_add', { user: app.request.get('user') }) }}" {{ form_enctype(form) }} method="POST">
+        {{ form_row(form.category) }}
+        {{ form_row(form.configuration.timeout) }}
+        {{ actions.cancel(path('qcm_admin_user_session_list')) }}
+        {{ actions.submit() }}
+        {{ form_rest(form) }}
+    </form>
+{% endblock %}

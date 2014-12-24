@@ -2,6 +2,10 @@ qcm_admin_user_resource:
     prefix: /user
     resource: @QcmAdminBundle/Resources/config/routing/user.yml
 
+qcm_admin_user_session_resource:
+    prefix: /user-session
+    resource: @QcmAdminBundle/Resources/config/routing/user_session.yml
+
 qcm_admin_category_resource:
     prefix: /category
     resource: @QcmAdminBundle/Resources/config/routing/category.yml
