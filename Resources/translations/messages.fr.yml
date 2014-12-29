@@ -21,6 +21,12 @@ qcm_admin:
         show: 'Utilisateur "%username%"'
         update: 'Modification de "%username%"'
 
+    user_session:
+        list: Liste des sessions
+        add: Ajouter une session à un utilisateur
+        show: 'Voir les sessions de "%username%"'
+        update: 'Modification de la session d''un utilisateur'
+
     category:
         list: Liste des catégories
         add: Ajouter une catégorie

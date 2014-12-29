@@ -36,3 +36,7 @@ ul.nav .dropdown-menu {
 .syntaxhighlighter {
     position: inherit!important;
 }
+
+label .required {
+    color: red;
+}

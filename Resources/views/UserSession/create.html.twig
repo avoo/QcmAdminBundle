@@ -6,10 +6,52 @@
     {{ actions.title('qcm_admin.user_session.add'|trans, 'glyphicon-user') }}
 
     <form class="form-horizontal col-sm-12 text-center" novalidate action="{{ path('qcm_admin_user_session_add', { user: app.request.get('user') }) }}" {{ form_enctype(form) }} method="POST">
-        {{ form_row(form.category) }}
+        {{ form_label(form.configuration.categories) }}
+        <div class="col-sm-6">
+            {% for category in form.configuration.categories %}
+                <div class="col-sm-6">
+                {{ form_row(category) }}
+                </div>
+            {% endfor %}
+            {{ form_errors(form.configuration.categories) }}
+        </div>
+
+        <div class="form-group row">
+            {{ form_label(form.configuration.dateStart) }}
+            <div class="col-sm-6" id="datetimepicker1">
+                <div class="input-group date">
+                    {{ form_widget(form.configuration.dateStart) }}
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+                {{ form_errors(form.configuration.dateStart) }}
+            </div>
+        </div>
         {{ form_row(form.configuration.timeout) }}
         {{ actions.cancel(path('qcm_admin_user_session_list')) }}
         {{ actions.submit() }}
         {{ form_rest(form) }}
     </form>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    <link rel="stylesheet" href="{{ asset('bundles/qcmadmin/css/bootstrap-datetimepicker.min.css') }}" />
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script type="text/javascript" src="{{ asset('bundles/qcmadmin/js/moment.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/qcmadmin/js/bootstrap-datetimepicker.js') }}"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#datetimepicker1').datetimepicker({
+                language: '{{ app.request.locale }}',
+                format: 'YYYY-MM-DD H:mm'
+            });
+        });
+    </script>
 {% endblock %}
