@@ -26,6 +26,9 @@ qcm_admin:
         add: Ajouter une session à un utilisateur
         show: 'Voir les sessions de "%username%"'
         update: 'Modification de la session d''un utilisateur'
+        alert: |
+            Attention, l'utilisateur aura en moyenne %timeout% secondes par question pour un total de %maxQuestions% questions.<br />
+            Vous pouvez confirmer votre choix ou le modifier.
 
     category:
         list: Liste des catégories

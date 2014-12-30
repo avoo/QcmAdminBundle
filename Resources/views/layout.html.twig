@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="{{ app.request.locale }}" lang="{{ app.request.locale }}">
     <head>
         <meta charset="UTF-8"/>
         <title>{% block title %}{% endblock %}</title>
@@ -65,6 +65,8 @@
         {% block javascripts %}
             <script type="text/javascript" src="{{ asset('bundles/qcmcore/js/jquery-2.1.1.min.js') }}"></script>
             <script type="text/javascript" src="{{ asset('bundles/qcmcore/js/bootstrap.min.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/bazingajstranslation/js/translator.min.js') }}"></script>
+            <script type="text/javascript" src="{{ url('bazinga_jstranslation_js', { '_locale' : app.request.locale }) }}"></script>
             <script type="text/javascript" src="{{ asset('bundles/qcmadmin/js/shCore.js') }}"></script>
             <script type="text/javascript" src="{{ asset('bundles/qcmadmin/js/brush/shBrushAS3.js') }}"></script>
             <script type="text/javascript" src="{{ asset('bundles/qcmadmin/js/brush/shBrushCss.js') }}"></script>

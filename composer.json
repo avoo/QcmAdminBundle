@@ -3,7 +3,8 @@
     "description": "QCM Admin bundle for Symfony2",
     "type": "symfony-bundle",
     "require": {
-        "php": ">=5.3.3"
+        "php": ">=5.3.3",
+        "willdurand/js-translation-bundle": "~2.1"
     },
     "require-dev": {
         "phpunit/phpunit": "*"

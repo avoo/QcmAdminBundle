@@ -5,7 +5,9 @@
 {% block content %}
     {{ actions.title('qcm_admin.user_session.add'|trans, 'glyphicon-user') }}
 
-    <form class="form-horizontal col-sm-12 text-center" novalidate action="{{ path('qcm_admin_user_session_add', { user: app.request.get('user') }) }}" {{ form_enctype(form) }} method="POST">
+    <div id="user-session-warning"></div>
+
+    <form class="user-session-configuration form-horizontal col-sm-12 text-center" novalidate action="{{ path('qcm_admin_user_session_add', { user: app.request.get('user') }) }}" {{ form_enctype(form) }} method="POST">
         {{ form_label(form.configuration.categories) }}
         <div class="col-sm-6">
             {% for category in form.configuration.categories %}
@@ -18,7 +20,7 @@
 
         <div class="form-group row">
             {{ form_label(form.configuration.dateStart) }}
-            <div class="col-sm-6" id="datetimepicker1">
+            <div class="col-sm-6" id="datetimepicker">
                 <div class="input-group date">
                     {{ form_widget(form.configuration.dateStart) }}
                     <span class="input-group-addon">
@@ -28,6 +30,7 @@
                 {{ form_errors(form.configuration.dateStart) }}
             </div>
         </div>
+        {{ form_row(form.configuration.maxQuestions) }}
         {{ form_row(form.configuration.timeout) }}
         {{ actions.cancel(path('qcm_admin_user_session_list')) }}
         {{ actions.submit() }}
@@ -46,12 +49,10 @@
 
     <script type="text/javascript" src="{{ asset('bundles/qcmadmin/js/moment.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/qcmadmin/js/bootstrap-datetimepicker.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/qcmadmin/js/user-session.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-            $('#datetimepicker1').datetimepicker({
-                language: '{{ app.request.locale }}',
-                format: 'YYYY-MM-DD H:mm'
-            });
+            $.initUserSession('{{ app.request.locale }}');
         });
     </script>
 {% endblock %}

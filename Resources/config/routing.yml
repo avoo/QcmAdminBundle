@@ -17,3 +17,6 @@ qcm_admin_question_resource:
 qcm_admin_answer_resource:
     prefix: /answer
     resource: @QcmAdminBundle/Resources/config/routing/answer.yml
+
+_bazinga_jstranslation:
+    resource: "@BazingaJsTranslationBundle/Resources/config/routing/routing.yml"
