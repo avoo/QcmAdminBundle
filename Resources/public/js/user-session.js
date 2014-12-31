@@ -21,7 +21,7 @@
         });
 
         $('form.user-session-configuration').on('submit', function() {
-            var firstAlert = !$('#user-session-warning').hasClass('alert-warning');
+            var firstAlert = !$('#user-session-warning').hasClass('alert');
 
             if (true == firstAlert) {
                 calculate();

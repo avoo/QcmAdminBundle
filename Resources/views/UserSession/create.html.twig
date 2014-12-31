@@ -8,16 +8,6 @@
     <div id="user-session-warning"></div>
 
     <form class="user-session-configuration form-horizontal col-sm-12 text-center" novalidate action="{{ path('qcm_admin_user_session_add', { user: app.request.get('user') }) }}" {{ form_enctype(form) }} method="POST">
-        {{ form_label(form.configuration.categories) }}
-        <div class="col-sm-6">
-            {% for category in form.configuration.categories %}
-                <div class="col-sm-6">
-                {{ form_row(category) }}
-                </div>
-            {% endfor %}
-            {{ form_errors(form.configuration.categories) }}
-        </div>
-
         <div class="form-group row">
             {{ form_label(form.configuration.dateStart) }}
             <div class="col-sm-6" id="datetimepicker">
@@ -30,6 +20,17 @@
                 {{ form_errors(form.configuration.dateStart) }}
             </div>
         </div>
+
+        {{ form_label(form.configuration.categories) }}
+        <div class="col-sm-6">
+            {% for category in form.configuration.categories %}
+                <div class="col-sm-6">
+                {{ form_row(category) }}
+                </div>
+            {% endfor %}
+            {{ form_errors(form.configuration.categories) }}
+        </div>
+
         {{ form_row(form.configuration.maxQuestions) }}
         {{ form_row(form.configuration.timeout) }}
         {{ actions.cancel(path('qcm_admin_user_session_list')) }}
