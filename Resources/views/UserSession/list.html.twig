@@ -1,18 +1,9 @@
 {% extends 'QcmAdminBundle::layout.html.twig' %}
-{% from '@QcmAdmin/User/macros.html.twig' import list %}
+{% from '@QcmAdmin/UserSession/macros.html.twig' import list %}
 
-{% block title %}{{ 'qcm_admin.user.list'|trans }}{% endblock %}
+{% block title %}{{ 'qcm_admin.user_session.list'|trans }}{% endblock %}
 
 {% block content %}
-    {{ actions.title('qcm_admin.user.list'|trans, 'glyphicon-user') }}
-
-    <div class="actions-menu">
-        {{ actions.add(path('qcm_admin_user_add')) }}
-    </div>
-
-    {{ list(users) }}
-
-    <div class="actions-menu">
-        {{ actions.add(path('qcm_admin_user_add')) }}
-    </div>
+    {{ actions.title('qcm_admin.user_session.list'|trans, 'glyphicon-user') }}
+    {{ list(user_sessions) }}
 {% endblock %}

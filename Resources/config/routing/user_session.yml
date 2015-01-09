@@ -13,10 +13,10 @@ qcm_admin_user_session_add:
             template: QcmAdminBundle:UserSession:create.html.twig
             redirect:
                 route: qcm_admin_user_session_show
-                parameters: { user: resource.id }
+                parameters: { id: resource.id }
 
 qcm_admin_user_session_show:
-    pattern: /show/{user}
+    pattern: /show/{id}
     defaults:
         _controller: qcm_core.controller.user_session:showAction
         _sylius:
