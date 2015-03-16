@@ -67,18 +67,18 @@
             <script type="text/javascript" src="{{ asset('bundles/qcmcore/js/bootstrap.min.js') }}"></script>
             <script type="text/javascript" src="{{ asset('bundles/bazingajstranslation/js/translator.min.js') }}"></script>
             <script type="text/javascript" src="{{ url('bazinga_jstranslation_js', { '_locale' : app.request.locale }) }}"></script>
-            <script type="text/javascript" src="{{ asset('bundles/qcmadmin/js/shCore.js') }}"></script>
-            <script type="text/javascript" src="{{ asset('bundles/qcmadmin/js/brush/shBrushAS3.js') }}"></script>
-            <script type="text/javascript" src="{{ asset('bundles/qcmadmin/js/brush/shBrushCss.js') }}"></script>
-            <script type="text/javascript" src="{{ asset('bundles/qcmadmin/js/brush/shBrushJScript.js') }}"></script>
-            <script type="text/javascript" src="{{ asset('bundles/qcmadmin/js/brush/shBrushPowerShell.js') }}"></script>
-            <script type="text/javascript" src="{{ asset('bundles/qcmadmin/js/brush/shBrushPhp.js') }}"></script>
-            <script type="text/javascript" src="{{ asset('bundles/qcmadmin/js/brush/shBrushSql.js') }}"></script>
-            <script type="text/javascript" src="{{ asset('bundles/qcmadmin/js/brush/shBrushXml.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/qcmcore/js/shCore.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/qcmcore/js/brush/shBrushAS3.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/qcmcore/js/brush/shBrushCss.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/qcmcore/js/brush/shBrushJScript.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/qcmcore/js/brush/shBrushPowerShell.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/qcmcore/js/brush/shBrushPhp.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/qcmcore/js/brush/shBrushSql.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/qcmcore/js/brush/shBrushXml.js') }}"></script>
 
             <script type="text/javascript">
                 $(document).ready(function() {
-                    SyntaxHighlighter.config.clipboardSwf = '{{ asset('bundles/qcmadmin/js/clipboard.swf') }}';
+                    SyntaxHighlighter.config.clipboardSwf = '{{ asset('bundles/qcmcore/js/clipboard.swf') }}';
                     SyntaxHighlighter.defaults.toolbar = false;
                     SyntaxHighlighter.all();
                 });
