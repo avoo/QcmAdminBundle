@@ -32,7 +32,13 @@
         </div>
 
         {{ form_row(form.configuration.maxQuestions) }}
+        {{ form_row(form.configuration.timerChoice) }}
+        <div class="timeout">
         {{ form_row(form.configuration.timeout) }}
+        </div>
+        <div class="time_per_question">
+            {{ form_row(form.configuration.timePerQuestion) }}
+        </div>
         {{ actions.cancel(path('qcm_admin_user_session_list')) }}
         {{ actions.submit() }}
         {{ form_rest(form) }}
@@ -54,6 +60,7 @@
     <script type="text/javascript">
         $(document).ready(function() {
             $.initUserSession('{{ app.request.locale }}');
+            $.timeoutChoice('qcm_core_user_session_configuration_timerChoice');
         });
     </script>
 {% endblock %}

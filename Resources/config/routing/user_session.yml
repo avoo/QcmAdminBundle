@@ -30,4 +30,4 @@ qcm_admin_user_session_edit:
             template: QcmAdminBundle:UserSession:update.html.twig
             redirect:
                 route: qcm_admin_user_session_show
-                parameters: { user: resource.id }
+                parameters: { id: resource.id }

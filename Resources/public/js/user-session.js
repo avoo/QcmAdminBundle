@@ -60,4 +60,34 @@
         $('#user-session-warning').removeClass('alert-success alert-danger alert-warning');
         $('#user-session-warning').addClass('alert ' + alert).html(Translator.trans('qcm_admin.user_session.alert', {'maxQuestions': maxQuestions.val(), 'timeout': (x1 + x2)}));
     };
+
+    $.timeoutChoice = function(id) {
+        var element = $('#' + id + ' option:selected').val();
+
+        $('#' + id + ' option').each(function() {
+            var choice = $(this).val();
+            if (choice != '') {
+                $('.' + choice).hide();
+            }
+        });
+
+        if (element != '') {
+            $('.' + element).show();
+        }
+
+        $('#' + id).on('change', function() {
+            var element = $(this).val();
+
+            $('#' + id + ' option').each(function() {
+                var choice = $(this).val();
+                if (choice != '') {
+                    $('.' + choice).hide();
+                }
+            });
+
+            if (element != '') {
+                $('.' + element).show();
+            }
+        });
+    };
 })(jQuery);

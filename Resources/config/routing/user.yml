@@ -4,6 +4,10 @@ qcm_admin_user_list:
         _controller: qcm_core.controller.user:indexAction
         _sylius:
             template: QcmAdminBundle:User:list.html.twig
+            method: getUsers
+            arguments: [ id: DESC ]
+            paginate: false
+            sortable: true
 
 qcm_admin_user_add:
     pattern: /add

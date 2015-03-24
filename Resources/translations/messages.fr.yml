@@ -47,3 +47,11 @@ qcm_admin:
         add: Ajouter une réponse
         show: 'Voir la réponse'
         update: 'Modification de la réponse'
+
+    questionnaires:
+        configuration: Configuration des questionnaires
+        date_start: Date de début
+        date_end: Date de fin
+        timeout: Durée
+        start_at: Débuté
+        end_at: Complété

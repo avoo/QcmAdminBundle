@@ -1,13 +1,66 @@
 {% extends 'QcmAdminBundle::layout.html.twig' %}
 
-{% block title %}{{ 'qcm_admin.user.update'|trans({ '%username%': user.username }) }}{% endblock %}
+{% block title %}{{ 'qcm_admin.user_session.add'|trans }}{% endblock %}
 
 {% block content %}
-    {{ actions.title('qcm_admin.user.list'|trans, 'glyphicon-user') }}
+    {{ actions.title('qcm_admin.user_session.add'|trans, 'glyphicon-user') }}
 
-    <form class="form-horizontal col-sm-12 text-center" novalidate action="{{ path('qcm_admin_user_edit', { id : user.id }) }}" {{ form_enctype(form) }} method="POST">
-        {{ form_widget(form) }}
-        {{ actions.cancel(path('qcm_admin_user_list')) }}
+    <div id="user-session-warning"></div>
+
+    <form class="user-session-configuration form-horizontal col-sm-12 text-center" novalidate action="{{ path('qcm_admin_user_session_edit', { id: user_session.id }) }}" {{ form_enctype(form) }} method="POST">
+        <div class="form-group row">
+            {{ form_label(form.configuration.dateStart) }}
+            <div class="col-sm-6" id="datetimepicker">
+                <div class="input-group date">
+                    {{ form_widget(form.configuration.dateStart) }}
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+                {{ form_errors(form.configuration.dateStart) }}
+            </div>
+        </div>
+
+        {{ form_label(form.configuration.categories) }}
+        <div class="col-sm-6">
+            {% for category in form.configuration.categories %}
+                <div class="col-sm-6">
+                    {{ form_row(category) }}
+                </div>
+            {% endfor %}
+            {{ form_errors(form.configuration.categories) }}
+        </div>
+
+        {{ form_row(form.configuration.maxQuestions) }}
+        {{ form_row(form.configuration.timerChoice) }}
+        <div class="timeout">
+            {{ form_row(form.configuration.timeout) }}
+        </div>
+        <div class="time_per_question">
+            {{ form_row(form.configuration.timePerQuestion) }}
+        </div>
+        {{ actions.cancel(path('qcm_admin_user_session_show', { id: user_session.id })) }}
         {{ actions.submit() }}
+        {{ form_rest(form) }}
     </form>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    <link rel="stylesheet" href="{{ asset('bundles/qcmadmin/css/bootstrap-datetimepicker.min.css') }}" />
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script type="text/javascript" src="{{ asset('bundles/qcmadmin/js/moment.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/qcmadmin/js/bootstrap-datetimepicker.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/qcmadmin/js/user-session.js') }}"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $.initUserSession('{{ app.request.locale }}');
+            $.timeoutChoice('qcm_core_user_session_configuration_timerChoice');
+        });
+    </script>
 {% endblock %}
