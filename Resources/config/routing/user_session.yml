@@ -11,6 +11,7 @@ qcm_admin_user_session_add:
         _controller: qcm_core.controller.user_session:createAction
         _sylius:
             template: QcmAdminBundle:UserSession:create.html.twig
+            factory: createNewUserSession
             redirect:
                 route: qcm_admin_user_session_show
                 parameters: { id: resource.id }

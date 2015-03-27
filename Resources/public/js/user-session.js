@@ -20,7 +20,7 @@
             });
         });
 
-        $('form.user-session-configuration').on('submit', function() {
+        $('form#user-session-configuration').on('submit', function() {
             var firstAlert = !$('#user-session-warning').hasClass('alert');
 
             if (true == firstAlert) {
@@ -89,5 +89,36 @@
                 $('.' + element).show();
             }
         });
+    };
+
+    var addClose = function() {
+        return '<button type="button" class="close" data-dismiss="alert">' +
+            '<span aria-hidden="true">&times;</span>' +
+            '<span class="sr-only">Close</span>' +
+            '</button>';
+    };
+
+    var bindShow = function() {
+        $('#categories_form').find('button.close').click(function() {
+            $('#add-category').show();
+        });
+    };
+
+    $.initCategories = function () {
+        $('#add-category').click(function() {
+            var answerCount = $('#categories_form button').length;
+            var answerList = $('#user-session-configuration');
+            var newWidget = answerList.attr('data-categories');
+            newWidget = newWidget.replace(/__name__/g, answerCount);
+
+            var newAnswer = $('<div class="alert alert-danger" role="alert"></div>').html(addClose() + newWidget);
+            bindShow();
+
+            newAnswer.appendTo($('#categories_form'));
+
+            return false;
+        });
+
+        bindShow();
     };
 })(jQuery);

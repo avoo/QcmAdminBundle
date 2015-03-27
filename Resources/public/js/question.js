@@ -12,11 +12,11 @@
         });
     };
 
-    $.initAnswer = function (answersMax, strict) {
+    $.initAnswer = function (answersMax) {
         $('#add-answer').click(function() {
             var answerCount = $('#answers_form button').length;
 
-            if (answerCount + 1 == answersMax && strict == 1) {
+            if (answersMax > 0 && answerCount + 1 == answersMax) {
                 $('#add-answer').hide();
             }
 

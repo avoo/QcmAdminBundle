@@ -43,7 +43,7 @@
     <script type="text/javascript" src="{{ asset('bundles/qcmadmin/js/question.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-            $.initAnswer({{ qcm_configuration.answersMax }}, {{ qcm_configuration.strict }});
+            $.initAnswer({{ qcm_configuration.answersMax }});
         });
     </script>
 {% endblock %}
