@@ -48,13 +48,12 @@
         }
 
         var total = x1 + x2;
+        var alert = 'alert-warning';
 
         if (total > 60) {
-            var alert = 'alert-success';
+            alert = 'alert-success';
         } else if (total <= 30) {
-            var alert = 'alert-danger';
-        } else {
-            var alert = 'alert-warning';
+            alert = 'alert-danger';
         }
 
         $('#user-session-warning').removeClass('alert-success alert-danger alert-warning');
@@ -98,27 +97,51 @@
             '</button>';
     };
 
-    var bindShow = function() {
+    var bindShow = function(id) {
         $('#categories_form').find('button.close').click(function() {
             $('#add-category').show();
+            $('#' + id + ' option[value="' + $(this).parents('li').data('id') + '"]').show();
         });
     };
 
-    $.initCategories = function () {
+    var hideOption = function(id) {
+        $.grep($('#categories_form').find('li'), function (input) {
+            $('#' + id + ' option[value="' + $(input).data('id') + '"]').hide();
+        });
+
+        $('#' + id + ' option:eq(0)').attr('selected', 'selected');
+    };
+
+    $.initCategories = function (id, categoriesId) {
+        var filter = [];
+        $(categoriesId).each(function(key, id) {
+            filter.push('[value="' + id + '"]');
+        });
+
+        $('#categories_form').find('input[type="checkbox"]').filter(filter.join(',')).prop('checked', true);
+
         $('#add-category').click(function() {
-            var answerCount = $('#categories_form button').length;
+            var element = $('#' + id + ' option:selected');
+
+            if (element.val() == '') {
+                return;
+            }
+
             var answerList = $('#user-session-configuration');
             var newWidget = answerList.attr('data-categories');
-            newWidget = newWidget.replace(/__name__/g, answerCount);
+            newWidget = newWidget.replace(/__name__/g, element.val());
 
-            var newAnswer = $('<div class="alert alert-danger" role="alert"></div>').html(addClose() + newWidget);
-            bindShow();
+            var name = element.text();
+            var newAnswer = $('<li class="list-group-item alert" role="alert" data-id="' + element.val() + '"></li>').html(addClose() + name + newWidget);
 
             newAnswer.appendTo($('#categories_form'));
+            bindShow(id);
+            hideOption(id);
 
             return false;
         });
 
-        bindShow();
+        bindShow(id);
+        hideOption(id);
     };
 })(jQuery);

@@ -1,4 +1,6 @@
 qcm_admin:
+    button:
+        add_this_category: Ajouter cette catégorie
     label:
         choose_file: Choisissez un fichier
 

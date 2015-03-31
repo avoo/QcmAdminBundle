@@ -7,7 +7,7 @@
 
     <div id="user-session-warning"></div>
 
-    <form id="user-session-configuration" class="form-horizontal col-sm-12 text-center" novalidate action="{{ path('qcm_admin_user_session_add', { user: app.request.get('user') }) }}" {{ form_enctype(form) }} method="POST" data-categories="{{ form_widget(form.configuration.categories.vars.prototype)|e }}">
+    <form id="user-session-configuration" class="form-horizontal col-sm-12 text-center" novalidate action="{{ path('qcm_admin_user_session_add', { user: app.request.get('user') }) }}" {{ form_enctype(form) }} method="POST">
         <div class="form-group row">
             {{ form_label(form.configuration.dateStart) }}
             <div class="col-sm-6" id="datetimepicker">
@@ -21,20 +21,15 @@
             </div>
         </div>
 
-        <div class="form-group row">
-            <button type="button" class="btn btn-info" id="add-category">Add Category</button>
-        </div>
-
         {{ form_label(form.configuration.categories) }}
         <div id="categories_form" class="col-sm-6">
             {% for category in form.configuration.categories %}
                 <div class="col-sm-6">
-                {{ form_row(category) }}
+                    {{ form_row(category) }}
                 </div>
             {% endfor %}
             {{ form_errors(form.configuration.categories) }}
         </div>
-
 
         {{ form_row(form.configuration.maxQuestions) }}
         {{ form_row(form.configuration.timerChoice) }}
@@ -65,8 +60,8 @@
     <script type="text/javascript">
         $(document).ready(function() {
             $.initUserSession('{{ app.request.locale }}');
-            $.initCategories();
             $.timeoutChoice('qcm_core_user_session_configuration_timerChoice');
+            $.initCategories('qcm_core_user_session_configuration_categoryChoice');
         });
     </script>
 {% endblock %}
