@@ -32,6 +32,17 @@
         </div>
 
         {{ form_row(form.configuration.maxQuestions) }}
+
+        {{ form_label(form.configuration.questionsLevel) }}
+        <div id="categories_form" class="col-sm-6">
+            {% for level in form.configuration.questionsLevel %}
+                <div class="col-sm-6">
+                    {{ form_row(level) }}
+                </div>
+            {% endfor %}
+            {{ form_errors(form.configuration.questionsLevel) }}
+        </div>
+
         {{ form_row(form.configuration.timerChoice) }}
         <div class="timeout">
             {{ form_row(form.configuration.timeout) }}
