@@ -73,6 +73,7 @@
             $.initUserSession('{{ app.request.locale }}');
             $.timeoutChoice('qcm_core_user_session_configuration_timerChoice');
             $.initCategories('qcm_core_user_session_configuration_categoryChoice');
+            $.initCheckAll();
         });
     </script>
 {% endblock %}

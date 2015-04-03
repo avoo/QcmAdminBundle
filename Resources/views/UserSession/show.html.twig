@@ -1,10 +1,10 @@
 {% extends 'QcmAdminBundle::layout.html.twig' %}
 {% from '@QcmAdmin/UserSession/macros.html.twig' import show %}
 
-{% block title %}{{ 'qcm_admin.user.show'|trans({ '%username%' : user_session.user.username }) }}{% endblock %}
+{% block title %}{{ 'qcm_admin.user_session.show'|trans({ '%username%' : user_session.user.username }) }}{% endblock %}
 
 {% block content %}
-    {{ actions.title('qcm_admin.user.show'|trans({ '%username%' : user_session.user.username }), 'glyphicon-user') }}
+    {{ actions.title('qcm_admin.user_session.show'|trans({ '%username%' : user_session.user.username }), 'glyphicon-user') }}
 
     <div class="actions-menu">
         {{ actions.cancel(path('qcm_admin_user_session_list'), 'qcm_core.button.return'|trans) }}

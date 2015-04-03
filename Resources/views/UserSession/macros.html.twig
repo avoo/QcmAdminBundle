@@ -106,7 +106,53 @@
         <tbody>
             <tr>
                 <td>{{ user_session.user.username }}</td>
-                <td>{{ dump(user_session.configuration) }}</td>
+                <td>
+                    <table class="table table-bordered">
+                        {% if user_session.configuration.dateStart is not null %}
+                            <tr>
+                                <td>{{ 'qcm_admin.questionnaires.date_start'|trans }}</td>
+                                <th>{{ user_session.configuration.dateStart.date|localizeddate }}</th>
+                            </tr>
+                        {% endif %}
+                        {% if user_session.configuration.dateEnd is not null %}
+                            <tr>
+                                <td>{{ 'qcm_admin.questionnaires.date_end'|trans }}</td>
+                                <th>{{ user_session.configuration.dateEnd.date|localizeddate }}</th>
+                            </tr>
+                        {% endif %}
+                        <tr>
+                            <td class="col-sm-3">{{ 'qcm_admin.title.categories'|trans }}</td>
+                            <th>{{ user_session.configuration.categories|length }}</th>
+                        </tr>
+                        <tr>
+                            <td>{{ 'qcm_admin.title.questions'|trans }}</td>
+                            <th>{{ user_session.configuration.questions|length }}/{{ user_session.configuration.maxQuestions }}</th>
+                        </tr>
+                        <tr>
+                            <td>{{ 'qcm_admin.questionnaires.timeout'|trans }}</td>
+                            <th>{{ user_session.configuration.timeout }}</th>
+                        </tr>
+                        {% if user_session.configuration.startAt is not null %}
+                            <tr>
+                                <td>{{ 'qcm_admin.questionnaires.start_at'|trans }}</td>
+                                <th>{{ user_session.configuration.startAt.date|localizeddate }}</th>
+                            </tr>
+                        {% endif %}
+                        {% if user_session.configuration.endAt is not null %}
+                            <tr>
+                                <td>{{ 'qcm_admin.questionnaires.end_at'|trans }}</td>
+                                <th>{{ user_session.configuration.endAt.date|localizeddate }}</th>
+                            </tr>
+                        {% endif %}
+                    </table>
+                </td>
+                <td>
+                    {% if user_session.configuration.maxQuestions - user_session.configuration.questions|length > 0 %}
+                    <a href="{{ path('qcm_admin_user_session_complete', { id : user_session.id }) }}"><img src="{{ asset('bundles/qcmadmin/images/complete.gif') }}" title="{{ 'qcm_admin.button.questionnaire_complete'|trans }}" /></a>
+                    {% endif %}
+                    <a href="{{ path('qcm_admin_user_session_edit', { id : user_session.id }) }}"><img src="{{ asset('bundles/qcmadmin/images/edit.png') }}" title="{{ 'qcm_core.button.edit'|trans }}" /></a>
+                    <a href="#"><img src="{{ asset('bundles/qcmadmin/images/delete.png') }}" title="{{ 'qcm_core.button.delete'|trans }}" /></a>
+                </td>
             </tr>
         </tbody>
     </table>

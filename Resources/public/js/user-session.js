@@ -61,6 +61,12 @@
     };
 
     $.timeoutChoice = function(id) {
+        if ($('.time_per_question input').val() != '') {
+            $('#' + id + ' option[value="time_per_question"]').attr('selected', 'selected');
+        } else if ($('.timeout input').val() != '') {
+            $('#' + id + ' option[value="timeout"]').attr('selected', 'selected');
+        }
+
         var element = $('#' + id + ' option:selected').val();
 
         $('#' + id + ' option').each(function() {
@@ -143,5 +149,15 @@
 
         bindShow(id);
         hideOption(id);
+    };
+
+    $.initCheckAll = function() {
+        $('.check_all').click(function() {
+            $(this).parents('.check_container').find('input[type="checkbox"]').prop('checked', true);
+        });
+
+        $('.uncheck_all').click(function() {
+            $(this).parents('.check_container').find('input[type="checkbox"]').prop('checked', false);
+        });
     };
 })(jQuery);

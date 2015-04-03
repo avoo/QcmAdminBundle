@@ -1,0 +1,23 @@
+{% extends 'QcmAdminBundle::layout.html.twig' %}
+
+{% block title %}{{ 'qcm_admin.user_session.complete'|trans }}{% endblock %}
+
+{% block content %}
+    {{ actions.title('qcm_admin.user_session.complete'|trans, 'glyphicon-user') }}
+
+    <form class="form-horizontal col-sm-12 text-center" novalidate action="{{ path('qcm_admin_user_session_complete', { id: app.request.get('id') }) }}" {{ form_enctype(form) }} method="POST">
+        <ul class="list-group">
+            {% for question in form.questions %}
+                <li class="list-group-item">
+                {{ form_label(question) }}
+                {{ form_widget(question) }}
+                </li>
+            {% endfor %}
+            {{ form_errors(form.questions) }}
+        </ul>
+
+        {{ actions.cancel(path('qcm_admin_user_session_show', { id: app.request.get('id') })) }}
+        {{ actions.submit() }}
+        {{ form_rest(form) }}
+    </form>
+{% endblock %}

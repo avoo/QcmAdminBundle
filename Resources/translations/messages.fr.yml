@@ -1,6 +1,7 @@
 qcm_admin:
     button:
         add_this_category: Ajouter cette catégorie
+        questionnaire_complete: Compléter le questionnaire
     label:
         choose_file: Choisissez un fichier
 
