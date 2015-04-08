@@ -25,8 +25,8 @@
         <div id="categories_form" class="col-sm-6">
             <div class="check_container">
                 <ul class="pager">
-                    <li class="check_all"><a href="javascript:void(0);">Tout cocher</a></li>
-                    <li class="uncheck_all"><a href="javascript:void(0);">Tout décocher</a></li>
+                    <li class="check_all"><a href="javascript:void(0);">{{ 'qcm_admin.label.check_all'|trans }}</a></li>
+                    <li class="uncheck_all"><a href="javascript:void(0);">{{ 'qcm_admin.label.uncheck_all'|trans }}</a></li>
                 </ul>
                 {% for category in form.configuration.categories %}
                     <div class="col-sm-6">
@@ -43,8 +43,8 @@
         <div id="categories_form" class="col-sm-6">
             <div class="check_container">
                 <ul class="pager">
-                    <li class="check_all"><a href="javascript:void(0);">Tout cocher</a></li>
-                    <li class="uncheck_all"><a href="javascript:void(0);">Tout décocher</a></li>
+                    <li class="check_all"><a href="javascript:void(0);">{{ 'qcm_admin.label.check_all'|trans }}</a></li>
+                    <li class="uncheck_all"><a href="javascript:void(0);">{{ 'qcm_admin.label.uncheck_all'|trans }}</a></li>
                 </ul>
                 {% for level in form.configuration.questionsLevel %}
                     <div class="col-sm-6">
@@ -62,17 +62,6 @@
         <div class="time_per_question">
             {{ form_row(form.configuration.timePerQuestion) }}
         </div>
-
-        {#{{ form_label(form.configuration.questions) }}
-        <div class="col-sm-6">
-            {% for question in form.configuration.questions %}
-                <div class="col-sm-6">
-                    {{ form_row(question) }}
-                </div>
-            {% endfor %}
-            {{ form_errors(form.configuration.questions) }}
-        </div>
-        <div class="clearfix"></div>#}
 
         {{ actions.cancel(path('qcm_admin_user_session_show', { id: user_session.id })) }}
         {{ actions.submit() }}

@@ -2,8 +2,11 @@ qcm_admin:
     button:
         add_this_category: Ajouter cette catégorie
         questionnaire_complete: Compléter le questionnaire
+        regenerate_questionnaire: Regénérer le questionnaire
     label:
         choose_file: Choisissez un fichier
+        check_all: Tout cocher
+        uncheck_all: Tout décocher
 
     title:
         users: Utilisateurs
@@ -28,7 +31,10 @@ qcm_admin:
         list: Liste des sessions
         add: Ajouter une session à un utilisateur
         show: 'Voir les sessions de "%username%"'
+        details: Détails de la session de "%username%"
         update: 'Modification de la session d''un utilisateur'
+        minutes: minutes
+        seconds: secondes
         alert: |
             Attention, l'utilisateur aura en moyenne %timeout% secondes par question pour un total de %maxQuestions% questions.<br />
             Vous pouvez confirmer votre choix ou le modifier.

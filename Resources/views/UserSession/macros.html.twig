@@ -62,11 +62,16 @@
                             </tr>
                             <tr>
                                 <td>{{ 'qcm_admin.title.questions'|trans }}</td>
-                                <th>{{ user_session.configuration.questions|length }}</th>
+                                <th {% if user_session.configuration.maxQuestions - user_session.configuration.questions|length > 0 %}class="alert-danger"{% endif %}>{{ user_session.configuration.questions|length }}/{{ user_session.configuration.maxQuestions }}</th>
                             </tr>
                             <tr>
-                                <td>{{ 'qcm_admin.questionnaires.timeout'|trans }}</td>
-                                <th>{{ user_session.configuration.timeout }}</th>
+                                {% if user_session.configuration.timeout is null %}
+                                    <td>{{ 'qcm_core.label.time_per_question'|trans }}</td>
+                                    <th>{{ user_session.configuration.timePerQuestion }} {{ 'qcm_admin.user_session.seconds'|trans }}</th>
+                                {% else %}
+                                    <td>{{ 'qcm_core.label.timeout'|trans }}</td>
+                                    <th>{{ (user_session.configuration.timeout/60)|round }} {{ 'qcm_admin.user_session.minutes'|trans }}</th>
+                                {% endif %}
                             </tr>
                             {% if user_session.configuration.startAt is not null %}
                             <tr>
@@ -84,7 +89,6 @@
                     </td>
                     <td>
                         <a href="{{ path('qcm_admin_user_session_show', { id : user_session.id }) }}"><img src="{{ asset('bundles/qcmadmin/images/list.png') }}" title="{{ 'qcm_core.button.show'|trans }}" /></a>
-                        <a href="{{ path('qcm_admin_user_session_edit', { id : user_session.id }) }}"><img src="{{ asset('bundles/qcmadmin/images/edit.png') }}" title="{{ 'qcm_core.button.edit'|trans }}" /></a>
                         <a href="#"><img src="{{ asset('bundles/qcmadmin/images/delete.png') }}" title="{{ 'qcm_core.button.delete'|trans }}" /></a>
                     </td>
                 </tr>
@@ -100,7 +104,6 @@
         <tr>
             <th>{{ 'qcm_core.label.username'|trans }}</th>
             <th>{{ 'qcm_core.label.email'|trans }}</th>
-            <th>{{ 'qcm_core.label.enabled'|trans }}</th>
         </tr>
         </thead>
         <tbody>
@@ -122,15 +125,20 @@
                         {% endif %}
                         <tr>
                             <td class="col-sm-3">{{ 'qcm_admin.title.categories'|trans }}</td>
-                            <th>{{ user_session.configuration.categories|length }}</th>
+                            <th>
+                                {% for category in user_session.configuration.categories %}
+                                    {{ category.name }}{% if not loop.last %}, {% endif %}
+                                {% endfor %}
+                            </th>
                         </tr>
                         <tr>
-                            <td>{{ 'qcm_admin.title.questions'|trans }}</td>
-                            <th>{{ user_session.configuration.questions|length }}/{{ user_session.configuration.maxQuestions }}</th>
-                        </tr>
-                        <tr>
-                            <td>{{ 'qcm_admin.questionnaires.timeout'|trans }}</td>
-                            <th>{{ user_session.configuration.timeout }}</th>
+                            {% if user_session.configuration.timeout is null %}
+                            <td>{{ 'qcm_core.label.time_per_question'|trans }}</td>
+                            <th>{{ user_session.configuration.timePerQuestion }} {{ 'qcm_admin.user_session.seconds'|trans }}</th>
+                            {% else %}
+                            <td>{{ 'qcm_core.label.timeout'|trans }}</td>
+                            <th>{{ (user_session.configuration.timeout/60)|round }} {{ 'qcm_admin.user_session.minutes'|trans }}</th>
+                            {% endif %}
                         </tr>
                         {% if user_session.configuration.startAt is not null %}
                             <tr>
@@ -146,14 +154,32 @@
                         {% endif %}
                     </table>
                 </td>
-                <td>
-                    {% if user_session.configuration.maxQuestions - user_session.configuration.questions|length > 0 %}
-                    <a href="{{ path('qcm_admin_user_session_complete', { id : user_session.id }) }}"><img src="{{ asset('bundles/qcmadmin/images/complete.gif') }}" title="{{ 'qcm_admin.button.questionnaire_complete'|trans }}" /></a>
-                    {% endif %}
-                    <a href="{{ path('qcm_admin_user_session_edit', { id : user_session.id }) }}"><img src="{{ asset('bundles/qcmadmin/images/edit.png') }}" title="{{ 'qcm_core.button.edit'|trans }}" /></a>
-                    <a href="#"><img src="{{ asset('bundles/qcmadmin/images/delete.png') }}" title="{{ 'qcm_core.button.delete'|trans }}" /></a>
-                </td>
             </tr>
         </tbody>
     </table>
+
+    <h4>{{ 'qcm_admin.title.questions'|trans }}</h4>
+    <div class="bs-example">
+        <div class="panel-group" id="accordion">
+            {% for question in user_session.configuration.questions %}
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{ loop.index }}">{{ loop.index }}. {{ question.category.name }}: {{ question.name|striptags }}</a>
+                        </h4>
+                    </div>
+                    <div id="collapse{{ loop.index }}" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <h4>{{ 'qcm_admin.title.answers'|trans }}</h4>
+                            {% for answer in question.answers %}
+                            <div class="panel panel-default">
+                                <div class="panel-body">{{ answer.value|raw }}</div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 {% endmacro %}

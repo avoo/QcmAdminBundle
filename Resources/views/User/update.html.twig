@@ -7,7 +7,7 @@
 
     <form class="form-horizontal col-sm-12 text-center" novalidate action="{{ path('qcm_admin_user_edit', { id : user.id }) }}" {{ form_enctype(form) }} method="POST">
         {{ form_widget(form) }}
-        {{ actions.cancel(path('qcm_admin_user_list')) }}
+        {{ actions.cancel(path('qcm_admin_user_show', { id: user.id })) }}
         {{ actions.submit() }}
     </form>
 {% endblock %}

@@ -32,15 +32,7 @@ qcm_admin_user_session_edit:
                 route: qcm_admin_user_session_show
                 parameters: { id: resource.id }
 
-qcm_admin_user_session_complete:
-    pattern: /completer/{id}
+qcm_admin_user_session_regenerate:
+    pattern: /regenerer/{id}
     defaults:
-        _controller: qcm_core.controller.user_session:updateAction
-        _sylius:
-            template: QcmAdminBundle:UserSession:complete.html.twig
-            form: qcm_admin_user_session_complete
-            method: getUserSessionConfiguration
-            arguments: [ $id ]
-            redirect:
-                route: qcm_admin_user_session_show
-                parameters: { id: resource.id }
+        _controller: QcmAdminBundle:Questionnaire:regenerate
