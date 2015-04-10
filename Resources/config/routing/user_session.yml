@@ -32,6 +32,13 @@ qcm_admin_user_session_edit:
                 route: qcm_admin_user_session_show
                 parameters: { id: resource.id }
 
+qcm_admin_user_session_delete:
+    pattern: /delete/{id}
+    defaults:
+        _controller: qcm_core.controller.user_session:deleteAction
+        _sylius:
+            redirect: qcm_admin_user_session_list
+
 qcm_admin_user_session_regenerate:
     pattern: /regenerer/{id}
     defaults:

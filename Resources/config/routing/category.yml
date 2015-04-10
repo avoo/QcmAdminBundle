@@ -31,3 +31,10 @@ qcm_admin_category_edit:
             redirect:
                 route: qcm_admin_category_show
                 parameters: { id: resource.id }
+
+qcm_admin_category_delete:
+    pattern: /delete/{id}
+    defaults:
+        _controller: qcm_core.controller.category:deleteAction
+        _sylius:
+            redirect: qcm_admin_category_list

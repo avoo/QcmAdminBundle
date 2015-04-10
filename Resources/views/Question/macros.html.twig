@@ -26,7 +26,7 @@
                 <td>
                     <a href="{{ path('qcm_admin_question_show', { id : question.id }) }}"><img src="{{ asset('bundles/qcmadmin/images/list.png') }}" title="{{ 'qcm_core.button.show'|trans }}" /></a>
                     <a href="{{ path('qcm_admin_question_edit', { id : question.id }) }}"><img src="{{ asset('bundles/qcmadmin/images/edit.png') }}" title="{{ 'qcm_core.button.edit'|trans }}" /></a>
-                    <a href="#"><img src="{{ asset('bundles/qcmadmin/images/delete.png') }}" title="{{ 'qcm_core.button.delete'|trans }}" /></a>
+                    <a href="{{ path('qcm_admin_question_delete', { id : question.id }) }}" class="delete"><img src="{{ asset('bundles/qcmadmin/images/delete.png') }}" title="{{ 'qcm_core.button.delete'|trans }}" /></a>
                 </td>
             </tr>
         {% endfor %}
@@ -64,7 +64,6 @@
                 </td>
                 <td>
                     <a href="{{ path('qcm_admin_answer_edit', { id : answer.id }) }}"><img src="{{ asset('bundles/qcmadmin/images/edit.png') }}" title="{{ 'qcm_core.button.edit'|trans }}" /></a>
-                    <a href="#"><img src="{{ asset('bundles/qcmadmin/images/delete.png') }}" title="{{ 'qcm_core.button.delete'|trans }}" /></a>
                 </td>
             </tr>
             {% endfor %}

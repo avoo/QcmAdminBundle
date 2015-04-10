@@ -28,22 +28,39 @@
                         <span class="sr-only">Close</span>
                     </button>
                     {{ form_widget(answer) }}
+                    <button type="button" class="btn btn-default preview" data-dismiss="modal">{{ 'qcm_admin.button.preview'|trans }}</button>
                 </div>
             {% endfor %}
         </div>
 
         {{ actions.cancel(path('qcm_admin_question_list')) }}
         {{ actions.submit() }}
+        <button type="button" class="btn btn-default help">{{ 'qcm_admin.button.help'|trans }}</button>
+
         {{ form_rest(form) }}
     </form>
+
+    <div class="helper invisible">{{ 'qcm_admin.answer.help'|trans|raw }}</div>
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
+
     <script type="text/javascript" src="{{ asset('bundles/qcmadmin/js/question.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function() {
             $.initAnswer({{ qcm_configuration.answersMax }});
+
+            $('.preview').on('click', function() {
+                bootbox.alert($(this).parent('.alert').find('textarea').val());
+                SyntaxHighlighter.highlight();
+            });
+
+            $('.help').on('click', function() {
+                bootbox.alert($('.helper').html());
+
+                return false;
+            });
         });
     </script>
 {% endblock %}

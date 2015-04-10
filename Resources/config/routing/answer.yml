@@ -1,13 +1,3 @@
-qcm_admin_answer_add:
-    pattern: /add
-    defaults:
-        _controller: qcm_core.controller.answer:createAction
-        _sylius:
-            template: QcmAdminBundle:Answer:create.html.twig
-            redirect:
-                route: qcm_admin_answer_show
-                parameters: { id: resource.id }
-
 qcm_admin_answer_show:
     pattern: /show/{id}
     defaults:

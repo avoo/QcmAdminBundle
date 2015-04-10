@@ -22,7 +22,7 @@
                 <td>
                     <a href="{{ path('qcm_admin_category_show', { id : category.id }) }}"><img src="{{ asset('bundles/qcmadmin/images/list.png') }}" title="{{ 'qcm_core.button.show'|trans }}" /></a>
                     <a href="{{ path('qcm_admin_category_edit', { id : category.id }) }}"><img src="{{ asset('bundles/qcmadmin/images/edit.png') }}" title="{{ 'qcm_core.button.edit'|trans }}" /></a>
-                    <a href="#"><img src="{{ asset('bundles/qcmadmin/images/delete.png') }}" title="{{ 'qcm_core.button.delete'|trans }}" /></a>
+                    <a href="{{ path('qcm_admin_category_delete', { id : category.id }) }}" class="delete"><img src="{{ asset('bundles/qcmadmin/images/delete.png') }}" title="{{ 'qcm_core.button.delete'|trans }}" /></a>
                 </td>
             </tr>
         {% endfor %}

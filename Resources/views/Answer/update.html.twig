@@ -6,8 +6,42 @@
     {{ actions.title('qcm_admin.answer.update'|trans, 'glyphicon-check') }}
 
     <form class="form-horizontal col-sm-12 text-center" novalidate action="{{ path('qcm_admin_answer_edit', { id : answer.id }) }}" {{ form_enctype(form) }} method="POST">
-        {{ form_widget(form) }}
-        {{ actions.cancel(path('qcm_admin_answer_list')) }}
+        <div id="answers_form">
+            <div class="alert alert-danger" role="alert">
+                <button type="button" class="close" data-dismiss="alert">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                {{ form_widget(form) }}
+                <button type="button" class="btn btn-default preview" data-dismiss="modal">{{ 'qcm_admin.button.preview'|trans }}</button>
+            </div>
+        </div>
+        {{ actions.cancel(path('qcm_admin_question_list')) }}
         {{ actions.submit() }}
+        <button type="button" class="btn btn-default help">{{ 'qcm_admin.button.help'|trans }}</button>
     </form>
+
+    <div class="helper invisible">{{ 'qcm_admin.answer.help'|trans|raw }}</div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script type="text/javascript" src="{{ asset('bundles/qcmadmin/js/question.js') }}"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $.initAnswer({{ qcm_configuration.answersMax }});
+
+            $('.preview').on('click', function() {
+                bootbox.alert($(this).parent('.alert').find('textarea').val());
+                SyntaxHighlighter.highlight();
+            });
+
+            $('.help').on('click', function() {
+                bootbox.alert($('.helper').html());
+
+                return false;
+            });
+        });
+    </script>
 {% endblock %}

@@ -31,3 +31,10 @@ qcm_admin_question_edit:
             redirect:
                 route: qcm_admin_question_show
                 parameters: { id: resource.id }
+
+qcm_admin_question_delete:
+    pattern: /delete/{id}
+    defaults:
+        _controller: qcm_core.controller.question:deleteAction
+        _sylius:
+            redirect: qcm_admin_question_list

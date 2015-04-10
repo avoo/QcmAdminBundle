@@ -63,7 +63,7 @@
                     </td>
                     <td>
                         <a href="{{ path('qcm_admin_user_session_show', { id : user_session.id }) }}"><img src="{{ asset('bundles/qcmadmin/images/list.png') }}" title="{{ 'qcm_core.button.show'|trans }}" /></a>
-                        <a href="#"><img src="{{ asset('bundles/qcmadmin/images/delete.png') }}" title="{{ 'qcm_core.button.delete'|trans }}" /></a>
+                        <a href="{{ path('qcm_admin_user_session_delete', { id : user_session.id }) }}" class="delete"><img src="{{ asset('bundles/qcmadmin/images/delete.png') }}" title="{{ 'qcm_core.button.delete'|trans }}" /></a>
                     </td>
                 </tr>
             {% endfor %}
@@ -133,7 +133,7 @@
                     </td>
                     <td>
                         <a href="{{ path('qcm_admin_user_session_show', { id : user_session.id }) }}"><img src="{{ asset('bundles/qcmadmin/images/list.png') }}" title="{{ 'qcm_core.button.show'|trans }}" /></a>
-                        <a href="#"><img src="{{ asset('bundles/qcmadmin/images/delete.png') }}" title="{{ 'qcm_core.button.delete'|trans }}" /></a>
+                        <a href="{{ path('qcm_admin_user_session_delete', { id : user_session.id }) }}" class="delete"><img src="{{ asset('bundles/qcmadmin/images/delete.png') }}" title="{{ 'qcm_core.button.delete'|trans }}" /></a>
                     </td>
                 </tr>
             {% endfor %}

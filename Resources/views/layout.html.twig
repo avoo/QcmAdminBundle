@@ -63,9 +63,11 @@
                 </div>
             </div>
         {% endblock %}
+
         {% block javascripts %}
             <script type="text/javascript" src="{{ asset('bundles/qcmcore/js/jquery-2.1.1.min.js') }}"></script>
             <script type="text/javascript" src="{{ asset('bundles/qcmcore/js/bootstrap.min.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/qcmcore/js/bootbox.min.js') }}"></script>
             <script type="text/javascript" src="{{ asset('bundles/bazingajstranslation/js/translator.min.js') }}"></script>
             <script type="text/javascript" src="{{ url('bazinga_jstranslation_js', { '_locale' : app.request.locale }) }}"></script>
             <script type="text/javascript" src="{{ asset('bundles/qcmcore/js/shCore.js') }}"></script>
@@ -82,6 +84,17 @@
                     SyntaxHighlighter.config.clipboardSwf = '{{ asset('bundles/qcmcore/js/clipboard.swf') }}';
                     SyntaxHighlighter.defaults.toolbar = false;
                     SyntaxHighlighter.all();
+
+                    $('.delete').on('click', function() {
+                        var url = $(this).attr('href');
+                        bootbox.confirm(Translator.trans('qcm_core.confirm_delete'), function(result) {
+                            if (result == true) {
+                                return window.location.href = url;
+                            }
+                        });
+
+                        return false;
+                    });
                 });
             </script>
         {% endblock %}

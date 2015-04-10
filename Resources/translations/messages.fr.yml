@@ -3,6 +3,8 @@ qcm_admin:
         add_this_category: Ajouter cette catégorie
         questionnaire_complete: Compléter le questionnaire
         regenerate_questionnaire: Regénérer le questionnaire
+        preview: Preview
+        help: Aide
     label:
         choose_file: Choisissez un fichier
         check_all: Tout cocher
@@ -18,6 +20,7 @@ qcm_admin:
 
     empty:
         user: Aucun utilisateur pour le moment
+        user_session: Aucune session pour le moment
         category: Aucune catégorie pour le moment
         question: Aucune question pour le moment
         answer: Aucune réponse pour le moment
@@ -57,6 +60,29 @@ qcm_admin:
         add: Ajouter une réponse
         show: 'Voir la réponse'
         update: 'Modification de la réponse'
+        help: |
+            <p>
+                Pour la rédaction des réponses, vous pouvez utiliser la colorisation syntaxique en fonction du language que vous souhaitez intégrer.
+                Par exemple du HTML:<br />
+                <b>&lt;pre class=&quot;brush: html&quot;&gt;
+                    &lt;div&gt;&lt;/div&gt;
+                &lt;/pre&gt;</b></br>
+                Remplacez le contenu de la class "brush" par la syntaxe que vous voulez.<br /><br />
+                Les syntaxes autorisées sont:<br />
+                <ul>
+                    <li>as3 pour ActionScript 3</li>
+                    <li>css</li>
+                    <li>javascript</li>
+                    <li>php</li>
+                    <li>html</li>
+                    <li>ps pour le Shell</li>
+                    <li>sql</li>
+                    <li>xml</li>
+                    <li>xhtml</li>
+                    <li>xslt</li>
+                    <li>html</li>
+                </ul>
+            </p>
 
     questionnaires:
         configuration: Configuration des questionnaires
@@ -65,3 +91,7 @@ qcm_admin:
         timeout: Durée
         start_at: Débuté
         end_at: Complété
+
+sylius:
+    resource:
+        question_exist: Vous ne pouvez pas supprimer une catégorie ayant des questions

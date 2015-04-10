@@ -40,3 +40,13 @@ ul.nav .dropdown-menu {
 label .required {
     color: red;
 }
+
+#answers_form div {
+    position: relative;
+}
+
+#answers_form .preview {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+}
