@@ -17,7 +17,7 @@
         {{ form_row(form.enabled) }}
 
         <div class="form-group row">
-            <button type="button" class="btn btn-info" id="add-answer">Add answer</button>
+            <button type="button" class="btn btn-info" id="add-answer">{{ 'qcm_core.button.add_answer'|trans }}</button>
         </div>
 
         <div id="answers_form">
@@ -28,7 +28,7 @@
                         <span class="sr-only">Close</span>
                     </button>
                     {{ form_widget(answer) }}
-                    <button type="button" class="btn btn-default preview" data-dismiss="modal">{{ 'qcm_admin.button.preview'|trans }}</button>
+                    <button type="button" class="btn btn-default preview">{{ 'qcm_admin.button.preview'|trans }}</button>
                 </div>
             {% endfor %}
         </div>

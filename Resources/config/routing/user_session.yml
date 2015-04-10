@@ -37,7 +37,7 @@ qcm_admin_user_session_delete:
     defaults:
         _controller: qcm_core.controller.user_session:deleteAction
         _sylius:
-            redirect: qcm_admin_user_session_list
+            redirect: qcm_admin_user_list
 
 qcm_admin_user_session_regenerate:
     pattern: /regenerer/{id}

@@ -28,7 +28,7 @@
                         <span class="sr-only">Close</span>
                     </button>
                     {{ form_widget(answer) }}
-                    <button type="button" class="btn btn-default preview" data-dismiss="modal">{{ 'qcm_admin.button.preview'|trans }}</button>
+                    <button type="button" class="btn btn-default preview">{{ 'qcm_admin.button.preview'|trans }}</button>
                 </div>
             {% endfor %}
         </div>
@@ -45,6 +45,7 @@
 
 {% block javascripts %}
     {{ parent() }}
+
     <script type="text/javascript" src="{{ asset('bundles/qcmadmin/js/question.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function() {
