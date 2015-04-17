@@ -1,0 +1,271 @@
+{% extends 'QcmAdminBundle::layout.html.twig' %}
+
+{% block title %}{{ 'qcm_admin.statistics.title'|trans }}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    <link rel="stylesheet" href="{{ asset('bundles/qcmadmin/css/morris.css') }}" />
+{% endblock %}
+
+{% block content %}
+    {{ actions.cancel(path('qcm_admin_user_show', {id: user_session.user.id}), 'qcm_core.button.return'|trans) }}
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="box box-primary" style="min-height: 230px;">
+                <div class="box-header with-border">
+                    <h3 class="box-title">{{ 'qcm_admin.statistics.score'|trans }}</h3>
+                </div>
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-4 text-center">
+                            <h4>{{ 'qcm_admin.statistics.percent'|trans }}</h4>
+                            <h2>{{ statistics.percentage }} <small>%</small></h2>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <h4>{{ 'qcm_admin.statistics.ratio'|trans }}</h4>
+                            <h2>{{ statistics.ratio }} <small>%</small></h2>
+                        </div>
+                        <div class="col-md-4">
+                            <h4 class="text-center">{{ 'qcm_admin.statistics.detail'|trans }}</h4>
+                            <table class="table">
+                                <tr>
+                                    <td>{{ 'qcm_admin.statistics.valid'|trans }}</td>
+                                    <td>{{ statistics.score.valid }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ 'qcm_admin.statistics.incomplete'|trans }}</td>
+                                    <td>{{ statistics.score.partial }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ 'qcm_admin.statistics.invalid'|trans }}</td>
+                                    <td>{{ statistics.score.not_valid }}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class='col-md-6'>
+            <div class="box box-primary" style="min-height: 230px;">
+                <div class="box-header with-border">
+                    <h3 class="box-title">{{ 'qcm_admin.statistics.questions_by_category'|trans }}</h3>
+                </div>
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="chart-responsive">
+                                <canvas id="pieChart" height="150"></canvas>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <ul class="chart-legend clearfix"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <div class="box box-primary">
+                <div class="box-header">
+                    <i class="fa fa-bar-chart-o"></i>
+                    <h3 class="box-title">{{ 'qcm_admin.statistics.score_per_category'|trans }}</h3>
+                </div>
+                <div class="box-body">
+                    <div class="row">
+                        {% for category in statistics.scoreByCategory %}
+                            <div class="col-md-3 col-sm-6 col-xs-6 text-center">
+                                <input type="text" class="knob" value="{{ (category.valid/category.total)*100 }}" data-skin="tron"  data-thickness="0.2" data-width="120" data-height="120" data-fgColor="{{ category.color }}" data-readonly="true"/>
+                                <div>{{ category.name }}</div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <div class="box box-primary">
+                <div class="box-header">
+                    <i class="fa fa-bar-chart-o"></i>
+                    <h3 class="box-title">{{ 'qcm_admin.title.answers'|trans }}</h3>
+                </div>
+                <div class="box-body">
+                    <div class="box-group" id="accordion">
+                        {% for key, question in user_session.configuration.questions %}
+                        <div class="panel box box-default">
+                            <div class="box-header with-border">
+                                <h4 class="box-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{ loop.index }}" aria-expanded="false">
+                                        <small>{{ question.category.name }}</small> {{ question.name }}
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapse{{ loop.index }}" class="panel-collapse collapse out" aria-expanded="false">
+                                <div class="box-body">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th class="col-xs-8">&nbsp;</th>
+                                                <th class="col-xs-2">{{ 'qcm_admin.statistics.good_answer'|trans }}</th>
+                                                <th class="col-xs-2">{{ 'qcm_admin.statistics.user_answer'|trans }}</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for answer in question.answers %}
+                                            {% set isValid = false %}
+                                            <tr>
+                                                <td>{{ answer.value|raw }}</td>
+                                                <td>
+                                                    {% if question.type == 'text' %}
+                                                        {{ answer.value|raw }}
+                                                    {% elseif answer.isValid %}
+                                                        {% set isValid = true %}
+                                                        <span class="label label-success">
+                                                            <i class="fa fa-check"></i>
+                                                        </span>
+                                                    {% endif %}
+                                                </td>
+                                                <td>
+                                                    {% if user_session.configuration.answers.get(key) is not null %}
+                                                        {% set exist = false %}
+                                                        {% for key, userAnswer in user_session.configuration.answers.get(key) %}
+                                                            {% if key is not same as('flag') %}
+                                                                {% if answer.id == userAnswer and exist == false %}
+                                                                    {% set exist = true %}
+                                                                {% endif %}
+                                                            {% endif %}
+                                                        {% endfor %}
+
+                                                        {% if exist == true %}
+                                                                <span class="label label-{{ isValid ? 'success' : 'danger' }}">
+                                                                    <i class="fa fa-check"></i>
+                                                                </span>
+                                                        {% elseif question.type == 'text' %}
+                                                            {{ user_session.configuration.answers.get(key).0 }}
+                                                        {% endif%}
+                                                    {% endif %}
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{ actions.cancel(path('qcm_admin_user_show', {id: user_session.user.id}), 'qcm_core.button.return'|trans) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script type="text/javascript" src="{{ asset('bundles/qcmadmin/js/plugins/jquery.knob.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/qcmadmin/js/plugins/Chart.min.js') }}"></script>
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function() {
+            var data = [];
+            {% for category in statistics.scoreByCategory %}
+            data.push({
+                value: {{ category.total }},
+                color: "{{ category.color }}",
+                highlight: "{{ category.color }}",
+                label: "{{ category.name }}"
+            });
+            {% endfor %}
+
+            var pieChartCanvas = $("#pieChart").get(0).getContext("2d");
+            var pieChart = new Chart(pieChartCanvas);
+
+            var pieOptions = {
+                //Boolean - Whether we should show a stroke on each segment
+                segmentShowStroke: true,
+                //String - The colour of each segment stroke
+                segmentStrokeColor: "#fff",
+                //Number - The width of each segment stroke
+                segmentStrokeWidth: 1,
+                //Number - The percentage of the chart that we cut out of the middle
+                percentageInnerCutout: 50, // This is 0 for Pie charts
+                //Number - Amount of animation steps
+                animationSteps: 100,
+                //String - Animation easing effect
+                animationEasing: "easeOutBounce",
+                //Boolean - Whether we animate the rotation of the Doughnut
+                animateRotate: true,
+                //Boolean - Whether we animate scaling the Doughnut from the centre
+                animateScale: false,
+                //Boolean - whether to make the chart responsive to window resizing
+                responsive: true,
+                // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
+                maintainAspectRatio: false,
+                //String - A legend template
+                legendTemplate: "",
+                //String - A tooltip template
+                tooltipTemplate: "<%=value %> <%=label%>"
+            };
+
+            $.each(data, function(key, category){
+                $('<li><i class="fa fa-circle-o" style="color: ' + category.color + ';"></i> ' + category.label + '</li>').appendTo('.chart-legend');
+            });
+
+            pieChart.Doughnut(data, pieOptions);
+
+            $(".knob").knob({
+                draw: function () {
+
+                    // "tron" case
+                    if (this.$.data('skin') == 'tron') {
+
+                        var a = this.angle(this.cv)  // Angle
+                                , sa = this.startAngle          // Previous start angle
+                                , sat = this.startAngle         // Start angle
+                                , ea                            // Previous end angle
+                                , eat = sat + a                 // End angle
+                                , r = true;
+
+                        this.g.lineWidth = this.lineWidth;
+
+                        this.o.cursor
+                        && (sat = eat - 0.3)
+                        && (eat = eat + 0.3);
+
+                        if (this.o.displayPrevious) {
+                            ea = this.startAngle + this.angle(this.value);
+                            this.o.cursor
+                            && (sa = ea - 0.3)
+                            && (ea = ea + 0.3);
+                            this.g.beginPath();
+                            this.g.strokeStyle = this.previousColor;
+                            this.g.arc(this.xy, this.xy, this.radius - this.lineWidth, sa, ea, false);
+                            this.g.stroke();
+                        }
+
+                        this.g.beginPath();
+                        this.g.strokeStyle = r ? this.o.fgColor : this.fgColor;
+                        this.g.arc(this.xy, this.xy, this.radius - this.lineWidth, sat, eat, false);
+                        this.g.stroke();
+
+                        this.g.lineWidth = 2;
+                        this.g.beginPath();
+                        this.g.strokeStyle = this.o.fgColor;
+                        this.g.arc(this.xy, this.xy, this.radius - this.lineWidth + 1 + this.lineWidth * 2 / 3, 0, 2 * Math.PI, false);
+                        this.g.stroke();
+
+                        return false;
+                    }
+                }
+            });
+        });
+    </script>
+{% endblock %}

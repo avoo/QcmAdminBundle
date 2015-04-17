@@ -4,7 +4,6 @@
 {% block title %}{{ 'qcm_admin.question.list'|trans }}{% endblock %}
 
 {% block content %}
-    {{ actions.title('qcm_admin.question.list'|trans, 'glyphicon-question-sign') }}
     {{ list(questions) }}
 
     <div class="actions-menu">

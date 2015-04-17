@@ -4,10 +4,45 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
+    <parameters>
+        <parameter key="qcm_admin.statistics.class">Qcm\Bundle\AdminBundle\Statistics\QuestionnaireStatistics</parameter>
+        <parameter key="qcm_admin.template.class">Qcm\Bundle\AdminBundle\Statistics\Answers\Template</parameter>
+        <parameter key="qcm_admin.checker_validator.class">Qcm\Bundle\AdminBundle\Statistics\Checker\CheckerValidator</parameter>
+
+        <parameter key="qcm_admin.checker_validate.text.class">Qcm\Bundle\AdminBundle\Statistics\Checker\TextChecker</parameter>
+        <parameter key="qcm_admin.checker_validate.choice.class">Qcm\Bundle\AdminBundle\Statistics\Checker\ChoiceChecker</parameter>
+        <parameter key="qcm_admin.checker_validate.checkbox.class">Qcm\Bundle\AdminBundle\Statistics\Checker\CheckboxChecker</parameter>
+    </parameters>
+
     <services>
-        <service id="qcm_core.question.registration.listener" class="Qcm\Bundle\AdminBundle\Listener\QuestionListener">
+        <service id="qcm_admin.question.registration.listener" class="Qcm\Bundle\AdminBundle\Listener\QuestionListener">
             <argument type="service" id="doctrine.orm.entity_manager" />
             <tag name="kernel.event_listener" event="qcm_core.question.pre_update" method="update" />
+        </service>
+
+        <service id="qcm_admin.checker_validator" class="%qcm_admin.checker_validator.class%">
+            <argument>%qcm_admin.validate_answer_checkers%</argument>
+            <call method="setContainer"><argument type="service" id="service_container"/></call>
+        </service>
+
+        <service id="qcm_admin.checker_validate.text" class="%qcm_admin.checker_validate.text.class%">
+            <tag name="qcm_admin.validate_answer_type_checker" type="text" />
+        </service>
+
+        <service id="qcm_admin.checker_validate.choice" class="%qcm_admin.checker_validate.choice.class%">
+            <tag name="qcm_admin.validate_answer_type_checker" type="choice" />
+        </service>
+
+        <service id="qcm_admin.checker_validate.checkbox" class="%qcm_admin.checker_validate.checkbox.class%">
+            <tag name="qcm_admin.validate_answer_type_checker" type="checkbox" />
+        </service>
+
+        <service id="qcm_admin.score" class="Qcm\Bundle\AdminBundle\Statistics\Answers\Score" />
+
+        <service id="qcm_admin.statistics" class="%qcm_admin.statistics.class%">
+            <argument type="service" id="qcm_admin.score" />
+            <argument>%qcm_admin.template.class%</argument>
+            <argument type="service" id="qcm_admin.checker_validator" />
         </service>
     </services>
 </container>

@@ -37,7 +37,7 @@
 
 {% block form_label %}
     {% if label is not sameas(false) -%}
-        {% set label_attr = label_attr|merge({'class': label_attr.class|default('') ~ ' col-sm-5 control-label'}) %}
+        {% set label_attr = label_attr|merge({'class': label_attr.class|default('') ~ ''}) %}
 
         {% if not compound -%}
             {% set label_attr = label_attr|merge({'for': id}) %}
@@ -51,7 +51,7 @@
         <label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
             {{ label|trans({}, translation_domain) }}
             {% if required %}
-                <span class="required">&ast;</span>
+                <span class="required text-red">&ast;</span>
             {% endif %}
         </label>
     {%- endif %}
@@ -59,7 +59,7 @@
 
 {% block form_row %}
     {% spaceless %}
-        <div class="{{ form_group_class }} row">
+        <div class="{{ form_group_class }}">
             {{ form_label(form) }}
             <div class="{{ row_class }}">
                 {{ form_widget(form) }}

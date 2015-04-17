@@ -1,0 +1,4 @@
+qcm_admin_statistics_show:
+    pattern: /show/{id}
+    defaults:
+        _controller: QcmAdminBundle:Statisitcs:stats

@@ -5,46 +5,91 @@
         <title>{% block title %}{% endblock %}</title>
         {% block meta %}{% endblock %}
         {% block stylesheets %}
-            <link rel="stylesheet" href="{{ asset('bundles/qcmcore/css/dashboard.css') }}" />
             <link rel="stylesheet" href="{{ asset('bundles/qcmcore/css/bootstrap.min.css') }}" />
+            <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+            <link href="http://code.ionicframework.com/ionicons/2.0.0/css/ionicons.min.css" rel="stylesheet" type="text/css" />
             <link rel="stylesheet" href="{{ asset('bundles/qcmcore/css/shCore.css') }}" />
             <link rel="stylesheet" href="{{ asset('bundles/qcmcore/css/shThemeDefault.css') }}" />
-            <link rel="stylesheet" href="{{ asset('bundles/qcmadmin/css/admin.css') }}" />
+            <link rel="stylesheet" href="{{ asset('bundles/qcmcore/css/AdminLTE.min.css') }}" />
+            <link rel="stylesheet" href="{{ asset('bundles/qcmcore/css/_all-skins.min.css') }}" />
         {% endblock %}
     </head>
-    <body>
-        {% import 'QcmCoreBundle:Macros:actions.html.twig' as actions %}
+    <body class="skin-blue">
+        <div class="wrapper">
+            {% import 'QcmCoreBundle:Macros:actions.html.twig' as actions %}
 
-        {% if form is defined %}
-            {% form_theme form '@QcmAdmin/forms.html.twig' %}
-        {% endif %}
+            {% if form is defined %}
+                {% form_theme form '@QcmAdmin/forms.html.twig' %}
+            {% endif %}
 
-        {% block container %}
-            {% block nav %}
-                <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-                    <div class="container-fluid">
-                        <div class="navbar-header">
-                            <a class="navbar-brand" href="javascript:void(0);">{{ app.user.username|capitalize }}</a>
-                        </div>
-                        <div id="navbar" class="navbar-collapse collapse">
-                            <ul class="nav navbar-nav navbar-left">
-                                <li><a href="{{ path('qcm_admin_user_list') }}">{{ 'qcm_admin.title.users'|trans }}</a></li>
-                                <li class="menu-item dropdown">
-                                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">{{ 'qcm_admin.title.questionnaires'|trans }} <b class="caret"></b></a>
+            {% block container %}
+                {% block nav %}
+                <header class="main-header">
+                    <a href="{{ path('qcm_admin_user_list') }}" class="logo">Admin</a>
+                    <nav class="navbar navbar-static-top" role="navigation">
+                        <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </a>
+                        <div class="navbar-custom-menu">
+                            <ul class="nav navbar-nav">
+                                <li class="dropdown user user-menu">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                        <span class="hidden-xs">{{ app.user.username|capitalize }}</span>
+                                    </a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="{{ path('qcm_admin_user_session_list') }}">{{ 'qcm_admin.title.all_questionnaires'|trans }}</a></li>
-                                        <li><a href="{{ path('qcm_admin_category_list') }}">{{ 'qcm_admin.title.categories'|trans }}</a></li>
-                                        <li><a href="{{ path('qcm_admin_question_list') }}">{{ 'qcm_admin.title.questions'|trans }}</a></li>
+                                        <li class="user-footer">
+                                            <div class="pull-left">
+                                                <a href="{{ path('qcm_admin_user_edit', { id: app.user.id }) }}" class="btn btn-default btn-flat">{{ 'qcm_core.label.profile'|trans }}</a>
+                                            </div>
+                                            <div class="pull-right">
+                                                <a href="{{ path('qcm_core_security_logout') }}" class="btn btn-default btn-flat">{{ 'qcm_core.label.logout'|trans }}</a>
+                                            </div>
+                                        </li>
                                     </ul>
                                 </li>
-                                <li><a href="{{ path('qcm_core_security_logout') }}">{{ 'qcm_core.label.logout'|trans }}</a></li>
                             </ul>
                         </div>
-                    </div>
-                </nav>
-            {% endblock %}
-            <div class="container">
-                <div class="row">
+                    </nav>
+                </header>
+                {% endblock %}
+
+                {% block navside %}
+                    <aside class="main-sidebar">
+                        <section class="sidebar">
+                            <ul class="sidebar-menu">
+                                <li class="treeview">
+                                    <a href="{{ path('qcm_admin_user_list') }}">
+                                        <i class="fa fa-user"></i>
+                                        <span>{{ 'qcm_admin.title.users'|trans }}</span>
+                                    </a>
+                                </li>
+                                <li class="treeview">
+                                    <a href="{{ path('qcm_admin_user_session_list') }}">
+                                        <i class="fa fa-file-text-o"></i>
+                                        <span>{{ 'qcm_admin.title.all_questionnaires'|trans }}</span>
+                                    </a>
+                                </li>
+                                <li class="treeview">
+                                    <a href="{{ path('qcm_admin_category_list') }}">
+                                        <i class="fa fa-sitemap"></i>
+                                        <span>{{ 'qcm_admin.title.categories'|trans }}</span>
+                                    </a>
+                                </li>
+                                <li class="treeview">
+                                    <a href="{{ path('qcm_admin_question_list') }}">
+                                        <i class="fa fa-question"></i>
+                                        <span>{{ 'qcm_admin.title.questions'|trans }}</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </section>
+                    </aside>
+                {% endblock %}
+
+                <div class="content-wrapper">
                     {% block flashMessages %}
                         {% for type, messages in app.session.flashbag.all() %}
                             {% for key, message in messages %}
@@ -56,13 +101,17 @@
                         {% endfor %}
                     {% endblock %}
 
-                    <div class="main">
+                    <section class="content-header">
+                        <h1>{{ block('title') }}</h1>
+                    </section>
+
+                    <section class="content">
                         {% block content %}{% endblock %}
-                    </div>
+                    </section>
                     {% block footer %}{% endblock %}
                 </div>
-            </div>
-        {% endblock %}
+            {% endblock %}
+        </div>
 
         {% block javascripts %}
             <script type="text/javascript" src="{{ asset('bundles/qcmcore/js/jquery-2.1.1.min.js') }}"></script>
@@ -78,6 +127,12 @@
             <script type="text/javascript" src="{{ asset('bundles/qcmcore/js/brush/shBrushPhp.js') }}"></script>
             <script type="text/javascript" src="{{ asset('bundles/qcmcore/js/brush/shBrushSql.js') }}"></script>
             <script type="text/javascript" src="{{ asset('bundles/qcmcore/js/brush/shBrushXml.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/qcmadmin/js/app.min.js') }}"></script>
+
+            <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+            <![endif]-->
 
             <script type="text/javascript">
                 $(document).ready(function() {

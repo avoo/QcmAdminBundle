@@ -23,7 +23,7 @@
         $('form#user-session-configuration').on('submit', function() {
             var firstAlert = !$('#user-session-warning').hasClass('alert');
 
-            if (true == firstAlert) {
+            if (true == firstAlert && $('#qcm_core_user_session_configuration_timerChoice option:selected').val() == 'timeout') {
                 calculate();
 
                 return false;
@@ -35,6 +35,14 @@
 
     var calculate = function() {
         var maxQuestions = $('#qcm_core_user_session_configuration_maxQuestions');
+        var warning = $('#user-session-warning');
+
+        if (maxQuestions.val() < 1 || $('#qcm_core_user_session_configuration_timerChoice option:selected').val() != 'timeout') {
+            warning.removeClass('alert-success alert-danger alert-warning').empty();
+
+            return;
+        }
+
         var number = $('#qcm_core_user_session_configuration_timeout').val()/maxQuestions.val();
 
         number = number.toFixed(0) + '';
@@ -56,29 +64,22 @@
             alert = 'alert-danger';
         }
 
-        $('#user-session-warning').removeClass('alert-success alert-danger alert-warning');
-        $('#user-session-warning').addClass('alert ' + alert).html(Translator.trans('qcm_admin.user_session.alert', {'maxQuestions': maxQuestions.val(), 'timeout': (x1 + x2)}));
+        warning.removeClass('alert-success alert-danger alert-warning');
+        warning.addClass('alert ' + alert).html(Translator.trans('qcm_admin.user_session.alert', {'maxQuestions': maxQuestions.val(), 'timeout': (x1 + x2)}));
     };
 
     $.timeoutChoice = function(id) {
-        if ($('.time_per_question input').val() != '') {
-            $('#' + id + ' option[value="time_per_question"]').attr('selected', 'selected');
-        } else if ($('.timeout input').val() != '') {
-            $('#' + id + ' option[value="timeout"]').attr('selected', 'selected');
-        }
-
         var element = $('#' + id + ' option:selected').val();
 
-        $('#' + id + ' option').each(function() {
-            var choice = $(this).val();
-            if (choice != '') {
-                $('.' + choice).hide();
-            }
-        });
-
-        if (element != '') {
-            $('.' + element).show();
+        if ($('.timeout input').val() != '') {
+            $('#' + id + ' option[value="timeout"]').attr('selected', 'selected');
+        } else if ($('.time_per_question input').val() != '') {
+            console.log('ok');
+            $('#' + id + ' option[value="time_per_question"]').attr('selected', 'selected');
         }
+
+        $('.timeout, .time_per_question').hide();
+        $('.' + $('#' + id + ' option:selected').val()).show();
 
         $('#' + id).on('change', function() {
             var element = $(this).val();

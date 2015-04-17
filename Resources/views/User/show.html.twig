@@ -4,8 +4,6 @@
 {% block title %}{{ 'qcm_admin.user.show'|trans({ '%username%' : user.username }) }}{% endblock %}
 
 {% block content %}
-    {{ actions.title('qcm_admin.user.show'|trans({ '%username%' : user.username }), 'glyphicon-user') }}
-
     <div class="actions-menu">
         {{ actions.cancel(path('qcm_admin_user_list'), 'qcm_core.button.return'|trans) }}
         {{ actions.edit(path('qcm_admin_user_edit', {id: user.id})) }}

@@ -92,6 +92,19 @@ qcm_admin:
         start_at: Débuté
         end_at: Complété
 
+    statistics:
+        title: Statistiques
+        questions_by_category: Questions par catégorie
+        score: Score
+        percent: Pourcentage
+        ratio: Ratio
+        detail: Détail
+        valid: Valide
+        incomplete: Incomplet
+        invalid: Invalide
+        score_per_category: Score par catégorie
+        good_answer: Bonne réponse
+        user_answer: Réponse utilisateur
 sylius:
     resource:
         question_exist: Vous ne pouvez pas supprimer une catégorie ayant des questions

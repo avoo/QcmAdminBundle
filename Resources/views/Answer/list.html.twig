@@ -4,7 +4,6 @@
 {% block title %}{{ 'qcm_admin.answer.list'|trans }}{% endblock %}
 
 {% block content %}
-    {{ actions.title('qcm_admin.answer.list'|trans, 'glyphicon-check') }}
     {{ list(answers) }}
 
     <div class="actions-menu">

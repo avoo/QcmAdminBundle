@@ -4,6 +4,5 @@
 {% block title %}{{ 'qcm_admin.user_session.list'|trans }}{% endblock %}
 
 {% block content %}
-    {{ actions.title('qcm_admin.user_session.list'|trans, 'glyphicon-user') }}
     {{ list(user_sessions) }}
 {% endblock %}

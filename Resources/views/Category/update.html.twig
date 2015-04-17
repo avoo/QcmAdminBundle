@@ -3,8 +3,6 @@
 {% block title %}{{ 'qcm_admin.category.update'|trans({ '%name%': category.name }) }}{% endblock %}
 
 {% block content %}
-    {{ actions.title('qcm_admin.category.list'|trans, 'glyphicon-th') }}
-
     <form class="form-horizontal col-sm-12 text-center" novalidate action="{{ path('qcm_admin_category_edit', { id : category.id }) }}" {{ form_enctype(form) }} method="POST">
         {{ form_widget(form) }}
         {{ actions.cancel(path('qcm_admin_category_list')) }}

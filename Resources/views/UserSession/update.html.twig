@@ -3,8 +3,6 @@
 {% block title %}{{ 'qcm_admin.user_session.add'|trans }}{% endblock %}
 
 {% block content %}
-    {{ actions.title('qcm_admin.user_session.add'|trans, 'glyphicon-user') }}
-
     <div id="user-session-warning"></div>
 
     <form id="user-session-configuration" class="form-horizontal col-sm-12 text-center" novalidate action="{{ path('qcm_admin_user_session_edit', { id: user_session.id }) }}" {{ form_enctype(form) }} method="POST">

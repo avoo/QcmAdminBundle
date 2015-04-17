@@ -4,8 +4,6 @@
 {% block title %}{{ 'qcm_admin.question.show'|trans }}{% endblock %}
 
 {% block content %}
-    {{ actions.title('qcm_admin.question.show'|trans, 'glyphicon-question-sign') }}
-
     <div class="actions-menu">
         {{ actions.cancel(path('qcm_admin_question_list'), 'qcm_core.button.return'|trans) }}
         {{ actions.edit(path('qcm_admin_question_edit', {id: question.id})) }}

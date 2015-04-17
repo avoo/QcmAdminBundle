@@ -3,8 +3,6 @@
 {% block title %}{{ 'qcm_admin.question.update'|trans }}{% endblock %}
 
 {% block content %}
-    {{ actions.title('qcm_admin.question.update'|trans, 'glyphicon-question-sign') }}
-
     <form id="question_form" class="form-horizontal col-sm-12 text-center" novalidate action="{{ path('qcm_admin_question_edit', {id : question.id}) }}" {{ form_enctype(form) }} method="POST" data-prototype="{{ form_widget(form.answers.vars.prototype)|e }}">
         {{ form_row(form.category) }}
         {{ form_row(form.name) }}

@@ -3,11 +3,17 @@
 {% block title %}{{ 'qcm_admin.user.add'|trans }}{% endblock %}
 
 {% block content %}
-    {{ actions.title('qcm_admin.user.add'|trans, 'glyphicon-user') }}
-
-    <form class="form-horizontal col-sm-12 text-center" novalidate action="{{ path('qcm_admin_user_add') }}" {{ form_enctype(form) }} method="POST">
-        {{ form_widget(form) }}
-        {{ actions.cancel(path('qcm_admin_user_list')) }}
-        {{ actions.submit() }}
-    </form>
+<div class="row">
+    <div class="col-md-12">
+        <div class="box box-primary">
+            <form novalidate action="{{ path('qcm_admin_user_add') }}" {{ form_enctype(form) }} method="POST">
+                <div class="box-body">
+                    {{ form_widget(form) }}
+                    {{ actions.cancel(path('qcm_admin_user_list')) }}
+                    {{ actions.submit() }}
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 {% endblock %}
