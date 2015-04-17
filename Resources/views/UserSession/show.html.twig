@@ -14,12 +14,13 @@
 
     <div class="actions-menu">
         {{ actions.cancel(path('qcm_admin_user_show', {id: user_session.user.id}), 'qcm_core.button.return'|trans) }}
-        {{ actions.edit(path('qcm_admin_user_session_edit', {id: user_session.id})) }}
-        <a href="{{ path('qcm_admin_user_session_delete', { id : user_session.id }) }}" class="btn btn-sm btn-danger delete">
-            <i class="glyphicon glyphicon-remove"></i>
-            <span>{{ 'qcm_core.button.delete'|trans }}</span>
-        </a>
-        {{ actions.add(path('qcm_admin_user_session_regenerate', {id: user_session.id}), 'qcm_admin.button.regenerate_questionnaire'|trans, 'glyphicon-repeat') }}
+        {% if user_session.configuration.endAt is null %}
+            {{ actions.edit(path('qcm_admin_user_session_edit', {id: user_session.id})) }}
+        {% endif %}
+        {{ actions.delete(path('qcm_admin_user_session_delete', { id : user_session.id })) }}
+        {% if user_session.configuration.endAt is null %}
+            {{ actions.add(path('qcm_admin_user_session_regenerate', {id: user_session.id}), 'qcm_admin.button.regenerate_questionnaire'|trans, 'fa-repeat') }}
+        {% endif %}
     </div>
 
     {{ show(user_session) }}

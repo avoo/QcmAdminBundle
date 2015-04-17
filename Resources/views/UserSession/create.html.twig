@@ -5,65 +5,77 @@
 {% block content %}
     <div id="user-session-warning"></div>
 
-    <form id="user-session-configuration" class="form-horizontal col-sm-12 text-center" novalidate action="{{ path('qcm_admin_user_session_add', { user: app.request.get('user') }) }}" {{ form_enctype(form) }} method="POST">
-        <div class="form-group row">
-            {{ form_label(form.configuration.dateStart) }}
-            <div class="col-sm-6" id="datetimepicker">
-                <div class="input-group date">
-                    {{ form_widget(form.configuration.dateStart) }}
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-                </div>
-                {{ form_errors(form.configuration.dateStart) }}
-            </div>
-        </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <form id="user-session-configuration" novalidate action="{{ path('qcm_admin_user_session_add', { user: app.request.get('user') }) }}" {{ form_enctype(form) }} method="POST">
+                    <div class="box-body">
+                        <div class="form-group">
+                            <div>
+                                {{ form_label(form.configuration.dateStart) }}
+                            </div>
+                            <div id="datetimepicker">
+                                <div class="input-group date">
+                                    {{ form_widget(form.configuration.dateStart) }}
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                                {{ form_errors(form.configuration.dateStart) }}
+                            </div>
+                        </div>
 
-        {{ form_label(form.configuration.categories) }}
-        <div id="categories_form" class="col-sm-6">
-            <div class="check_container">
-                <ul class="pager">
-                    <li class="check_all"><a href="javascript:void(0);">{{ 'qcm_admin.label.check_all'|trans }}</a></li>
-                    <li class="uncheck_all"><a href="javascript:void(0);">{{ 'qcm_admin.label.uncheck_all'|trans }}</a></li>
-                </ul>
-                {% for category in form.configuration.categories %}
-                    <div class="col-sm-6">
-                        {{ form_row(category) }}
+                        {{ form_label(form.configuration.categories) }}
+                        <div id="categories_form">
+                            <div class="check_container">
+                                <ul class="pager">
+                                    <li class="check_all"><a href="javascript:void(0);">{{ 'qcm_admin.label.check_all'|trans }}</a></li>
+                                    <li class="uncheck_all"><a href="javascript:void(0);">{{ 'qcm_admin.label.uncheck_all'|trans }}</a></li>
+                                </ul>
+                                {% for category in form.configuration.categories %}
+                                    <div class="col-sm-6">
+                                        {{ form_row(category) }}
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            {{ form_errors(form.configuration.categories) }}
+                        </div>
+
+                        <div class="clearfix"></div>
+                        {{ form_row(form.configuration.maxQuestions) }}
+
+                        {{ form_label(form.configuration.questionsLevel) }}
+                        <div id="categories_form">
+                            <div class="check_container">
+                                <ul class="pager">
+                                    <li class="check_all"><a href="javascript:void(0);">{{ 'qcm_admin.label.check_all'|trans }}</a></li>
+                                    <li class="uncheck_all"><a href="javascript:void(0);">{{ 'qcm_admin.label.uncheck_all'|trans }}</a></li>
+                                </ul>
+                                {% for level in form.configuration.questionsLevel %}
+                                    <div class="col-sm-6">
+                                        {{ form_row(level) }}
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            {{ form_errors(form.configuration.questionsLevel) }}
+                        </div>
+
+                        <div class="clearfix"></div>
+                        {{ form_row(form.configuration.timerChoice) }}
+                        <div class="timeout">
+                        {{ form_row(form.configuration.timeout) }}
+                        </div>
+                        <div class="time_per_question">
+                            {{ form_row(form.configuration.timePerQuestion) }}
+                        </div>
+                        {{ actions.cancel(path('qcm_admin_user_list')) }}
+                        {{ actions.submit() }}
+                        {{ form_rest(form) }}
                     </div>
-                {% endfor %}
+                </form>
             </div>
-            {{ form_errors(form.configuration.categories) }}
         </div>
-
-        {{ form_row(form.configuration.maxQuestions) }}
-
-        {{ form_label(form.configuration.questionsLevel) }}
-        <div id="categories_form" class="col-sm-6">
-            <div class="check_container">
-                <ul class="pager">
-                    <li class="check_all"><a href="javascript:void(0);">{{ 'qcm_admin.label.check_all'|trans }}</a></li>
-                    <li class="uncheck_all"><a href="javascript:void(0);">{{ 'qcm_admin.label.uncheck_all'|trans }}</a></li>
-                </ul>
-                {% for level in form.configuration.questionsLevel %}
-                    <div class="col-sm-6">
-                        {{ form_row(level) }}
-                    </div>
-                {% endfor %}
-            </div>
-            {{ form_errors(form.configuration.questionsLevel) }}
-        </div>
-
-        {{ form_row(form.configuration.timerChoice) }}
-        <div class="timeout">
-        {{ form_row(form.configuration.timeout) }}
-        </div>
-        <div class="time_per_question">
-            {{ form_row(form.configuration.timePerQuestion) }}
-        </div>
-        {{ actions.cancel(path('qcm_admin_user_list')) }}
-        {{ actions.submit() }}
-        {{ form_rest(form) }}
-    </form>
+    </div>
 {% endblock %}
 
 {% block stylesheets %}
