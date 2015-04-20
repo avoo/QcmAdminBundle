@@ -32,11 +32,16 @@
                                     <li class="check_all"><a href="javascript:void(0);">{{ 'qcm_admin.label.check_all'|trans }}</a></li>
                                     <li class="uncheck_all"><a href="javascript:void(0);">{{ 'qcm_admin.label.uncheck_all'|trans }}</a></li>
                                 </ul>
-                                {% for category in form.configuration.categories %}
-                                    <div class="col-sm-6">
-                                        {{ form_row(category) }}
+                                <div class="row">
+                                    <div class="center-block label-inline" style="width: 300px;">
+                                        {% for category in form.configuration.categories %}
+                                            <div class="col-sm-6">
+                                                {{ form_widget(category) }}
+                                                {{ form_label(category) }}
+                                            </div>
+                                        {% endfor %}
                                     </div>
-                                {% endfor %}
+                                </div>
                             </div>
                             {{ form_errors(form.configuration.categories) }}
                         </div>
@@ -51,11 +56,16 @@
                                     <li class="check_all"><a href="javascript:void(0);">{{ 'qcm_admin.label.check_all'|trans }}</a></li>
                                     <li class="uncheck_all"><a href="javascript:void(0);">{{ 'qcm_admin.label.uncheck_all'|trans }}</a></li>
                                 </ul>
-                                {% for level in form.configuration.questionsLevel %}
-                                    <div class="col-sm-6">
-                                        {{ form_row(level) }}
+                                <div class="row">
+                                    <div class="center-block label-inline" style="width: 300px;">
+                                        {% for level in form.configuration.questionsLevel %}
+                                            <div class="col-sm-6">
+                                                {{ form_widget(level) }}
+                                                {{ form_label(level) }}
+                                            </div>
+                                        {% endfor %}
                                     </div>
-                                {% endfor %}
+                                </div>
                             </div>
                             {{ form_errors(form.configuration.questionsLevel) }}
                         </div>
@@ -63,7 +73,7 @@
                         <div class="clearfix"></div>
                         {{ form_row(form.configuration.timerChoice) }}
                         <div class="timeout">
-                        {{ form_row(form.configuration.timeout) }}
+                            {{ form_row(form.configuration.timeout) }}
                         </div>
                         <div class="time_per_question">
                             {{ form_row(form.configuration.timePerQuestion) }}

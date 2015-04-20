@@ -96,7 +96,7 @@
                             <thead>
                             <tr>
                                 <th>{{ 'qcm_admin.questionnaires.configuration'|trans }}</th>
-                                <th class="col-sm-2">{{ 'qcm_core.label.actions'|trans }}</th>
+                                <th class="col-sm-3">{{ 'qcm_core.label.actions'|trans }}</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -151,7 +151,7 @@
                                         {% if user_session.configuration.endAt is not null %}
                                             {{ actions.show(path('qcm_admin_statistics_show', { id : user_session.id }), 'qcm_admin.statistics.title'|trans) }}
                                         {% endif %}
-                                        {{ actions.show(path('qcm_admin_user_session_show', { id : user_session.id })) }}
+                                        {{ actions.show(path('qcm_admin_user_session_show', { id : user_session.id }), 'qcm_admin.statistics.detail'|trans) }}
                                         {{ actions.delete(path('qcm_admin_user_session_delete', { id : user_session.id })) }}
                                     </td>
                                 </tr>

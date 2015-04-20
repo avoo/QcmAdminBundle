@@ -24,7 +24,6 @@
                                     {% if false == user.hasRole('ROLE_ADMIN') %}
                                         {{ actions.add(path('qcm_admin_user_session_add', { user : user.id }), 'qcm_core.button.add_questionnaire'|trans, 'fa-question') }}
                                     {% endif %}
-                                    {{ actions.edit(path('qcm_admin_user_edit', { id : user.id })) }}
                                     {{ actions.show(path('qcm_admin_user_show', { id : user.id })) }}
                                 </td>
                             </tr>

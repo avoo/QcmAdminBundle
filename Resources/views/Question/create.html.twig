@@ -3,40 +3,48 @@
 {% block title %}{{ 'qcm_admin.question.add'|trans }}{% endblock %}
 
 {% block content %}
-    <form id="question_form" class="form-horizontal col-sm-12 text-center" novalidate action="{{ path('qcm_admin_question_add') }}" {{ form_enctype(form) }} method="POST" data-prototype="{{ form_widget(form.answers.vars.prototype)|e }}">
-        {{ form_row(form.category) }}
-        {{ form_row(form.name) }}
+<div class="row">
+    <div class="col-md-12">
+        <div class="box box-primary">
+            <form id="question_form" novalidate action="{{ path('qcm_admin_question_add') }}" {{ form_enctype(form) }} method="POST" data-prototype="{{ form_widget(form.answers.vars.prototype)|e }}">
+                <div class="box-body">
+                    {{ form_row(form.category) }}
+                    {{ form_row(form.name) }}
 
-        {% if form.level is defined %}
-            {{ form_row(form.level) }}
-        {% endif %}
+                    {% if form.level is defined %}
+                        {{ form_row(form.level) }}
+                    {% endif %}
 
-        {{ form_row(form.type) }}
-        {{ form_row(form.enabled) }}
+                    {{ form_row(form.type) }}
+                    {{ form_row(form.enabled) }}
 
-        <div class="form-group row">
-            <button type="button" class="btn btn-info" id="add-answer">{{ 'qcm_core.button.add_answer'|trans }}</button>
-        </div>
+                    <div class="form-group row text-center">
+                        <button type="button" class="btn btn-info" id="add-answer">{{ 'qcm_core.button.add_answer'|trans }}</button>
+                    </div>
 
-        <div id="answers_form">
-            {% for answer in form.answers %}
-                <div class="alert alert-danger" role="alert">
-                    <button type="button" class="close" data-dismiss="alert">
-                        <span aria-hidden="true">&times;</span>
-                        <span class="sr-only">Close</span>
-                    </button>
-                    {{ form_widget(answer) }}
-                    <button type="button" class="btn btn-default preview">{{ 'qcm_admin.button.preview'|trans }}</button>
+                    <div id="answers_form">
+                        {% for answer in form.answers %}
+                            <div class="alert alert-danger" role="alert">
+                                <button type="button" class="close" data-dismiss="alert">
+                                    <span aria-hidden="true">&times;</span>
+                                    <span class="sr-only">Close</span>
+                                </button>
+                                {{ form_widget(answer) }}
+                                <button type="button" class="btn btn-default preview">{{ 'qcm_admin.button.preview'|trans }}</button>
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                    {{ actions.cancel(path('qcm_admin_question_list')) }}
+                    {{ actions.submit() }}
+                    <button type="button" class="btn btn-default help">{{ 'qcm_admin.button.help'|trans }}</button>
+
+                    {{ form_rest(form) }}
                 </div>
-            {% endfor %}
+            </form>
         </div>
-
-        {{ actions.cancel(path('qcm_admin_question_list')) }}
-        {{ actions.submit() }}
-        <button type="button" class="btn btn-default help">{{ 'qcm_admin.button.help'|trans }}</button>
-
-        {{ form_rest(form) }}
-    </form>
+    </div>
+</div>
 
     <div class="helper invisible">{{ 'qcm_admin.answer.help'|trans|raw }}</div>
 {% endblock %}

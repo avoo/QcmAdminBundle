@@ -4,13 +4,3 @@ qcm_admin_answer_show:
         _controller: qcm_core.controller.answer:showAction
         _sylius:
             template: QcmAdminBundle:Answer:show.html.twig
-
-qcm_admin_answer_edit:
-    pattern: /edit/{id}
-    defaults:
-        _controller: qcm_core.controller.answer:updateAction
-        _sylius:
-            template: QcmAdminBundle:Answer:update.html.twig
-            redirect:
-                route: qcm_admin_question_show
-                parameters: { id: resource.question.id }
