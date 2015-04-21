@@ -1,0 +1,4 @@
+qcm_core:
+    service:
+        statistics:
+            class: Qcm\Bundle\AdminBundle\Statistics\QuestionnaireStatistics

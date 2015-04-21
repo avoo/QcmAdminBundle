@@ -9,6 +9,7 @@ qcm_admin:
         choose_file: Choisissez un fichier
         check_all: Tout cocher
         uncheck_all: Tout décocher
+        level: Niveau
 
     title:
         users: Utilisateurs
@@ -92,17 +93,22 @@ qcm_admin:
         start_at: Débuté
         end_at: Complété
 
+    questionnaire:
+        not_completed: Le questionnaire n'a pas encore été terminé
+
     statistics:
         title: Statistiques
-        questions_by_category: Questions par catégorie
+        questions_by_category: Questions par catégories
         score: Score
         percent: Pourcentage
         ratio: Ratio
         detail: Détail
+        completed_in: Complété en
         valid: Valide
         incomplete: Incomplet
         invalid: Invalide
         score_per_category: Score par catégorie
+        score_per_level: Score par niveau
         good_answer: Bonne réponse
         user_answer: Réponse utilisateur
 sylius:

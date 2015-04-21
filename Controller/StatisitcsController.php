@@ -23,10 +23,10 @@ class StatisitcsController extends Controller
     {
         /** @var UserSessionInterface $userSession */
         $userSession = $this->get('qcm_core.controller.user_session')->findOr404($request);
-        $statistics = $this->get('qcm_admin.statistics')->execute($userSession);
+        $statistics = $this->get('qcm_core.statistics')->execute($userSession);
 
         if (is_null($userSession->getConfiguration()->getEndAt())) {
-            $this->get('session')->getFlashBag()->add('danger', 'qcm_public.questionnaire.not_completed');
+            $this->get('session')->getFlashBag()->add('danger', 'qcm_admin.questionnaire.not_completed');
 
             return $this->redirect($this->generateUrl('qcm_admin_user_session_list'));
         }

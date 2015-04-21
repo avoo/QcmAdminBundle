@@ -13,7 +13,7 @@
 
     <div class="row">
         <div class="col-md-6">
-            <div class="box box-primary" style="min-height: 230px;">
+            <div class="box box-danger" style="min-height: 280px;">
                 <div class="box-header with-border">
                     <h3 class="box-title">{{ 'qcm_admin.statistics.score'|trans }}</h3>
                 </div>
@@ -30,6 +30,10 @@
                         <div class="col-md-4">
                             <h4 class="text-center">{{ 'qcm_admin.statistics.detail'|trans }}</h4>
                             <table class="table">
+                                <tr>
+                                    <td>{{ 'qcm_admin.statistics.completed_in'|trans }}</td>
+                                    <td>{{ user_session.configuration.startAt.diff(user_session.configuration.endAt).format('%H h %I m %S s') }}</td>
+                                </tr>
                                 <tr>
                                     <td>{{ 'qcm_admin.statistics.valid'|trans }}</td>
                                     <td>{{ statistics.score.valid }}</td>
@@ -49,7 +53,7 @@
             </div>
         </div>
         <div class='col-md-6'>
-            <div class="box box-primary" style="min-height: 230px;">
+            <div class="box box-default" style="min-height: 280px;">
                 <div class="box-header with-border">
                     <h3 class="box-title">{{ 'qcm_admin.statistics.questions_by_category'|trans }}</h3>
                 </div>
@@ -68,7 +72,7 @@
             </div>
         </div>
         <div class="col-xs-12">
-            <div class="box box-primary">
+            <div class="box box-default">
                 <div class="box-header">
                     <i class="fa fa-bar-chart-o"></i>
                     <h3 class="box-title">{{ 'qcm_admin.statistics.score_per_category'|trans }}</h3>
@@ -86,9 +90,27 @@
             </div>
         </div>
         <div class="col-xs-12">
-            <div class="box box-primary">
+            <div class="box box-default">
                 <div class="box-header">
                     <i class="fa fa-bar-chart-o"></i>
+                    <h3 class="box-title">{{ 'qcm_admin.statistics.score_per_level'|trans }}</h3>
+                </div>
+                <div class="box-body">
+                    <div class="row">
+                        {% for level in statistics.scoreByLevel %}
+                            <div class="col-md-3 col-sm-6 col-xs-6 text-center">
+                                <input type="text" class="knob" value="{{ (level.valid/level.total)*100 }}" data-skin="tron"  data-thickness="0.2" data-width="120" data-height="120" data-fgColor="{{ level.color }}" data-readonly="true"/>
+                                <div>{{ 'qcm_admin.label.level'|trans ~ ' ' ~ level.name }}</div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <div class="box box-default">
+                <div class="box-header">
+                    <i class="fa fa-check"></i>
                     <h3 class="box-title">{{ 'qcm_admin.title.answers'|trans }}</h3>
                 </div>
                 <div class="box-body">
@@ -98,7 +120,7 @@
                             <div class="box-header with-border">
                                 <h4 class="box-title">
                                     <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{ loop.index }}" aria-expanded="false">
-                                        <small>{{ question.category.name }}</small> {{ question.name }}
+                                        <div><small>{{ question.category.name }} - {{ 'qcm_admin.label.level'|trans ~ ' ' ~ question.level }}</small></div>{{ question.name }}
                                     </a>
                                 </h4>
                             </div>
@@ -118,9 +140,7 @@
                                             <tr>
                                                 <td>{{ answer.value|raw }}</td>
                                                 <td>
-                                                    {% if question.type == 'text' %}
-                                                        {{ answer.value|raw }}
-                                                    {% elseif answer.isValid %}
+                                                    {% if answer.isValid %}
                                                         {% set isValid = true %}
                                                         <span class="label label-success">
                                                             <i class="fa fa-check"></i>
@@ -142,7 +162,7 @@
                                                                 <span class="label label-{{ isValid ? 'success' : 'danger' }}">
                                                                     <i class="fa fa-check"></i>
                                                                 </span>
-                                                        {% elseif question.type == 'text' %}
+                                                        {% elseif question.type == 'text' and user_session.configuration.answers.get(key) is not empty %}
                                                             {{ user_session.configuration.answers.get(key).0 }}
                                                         {% endif%}
                                                     {% endif %}

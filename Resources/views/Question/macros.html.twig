@@ -63,7 +63,7 @@
                             <tr>
                                 <td>{{ question.name }}</td>
                                 <td>{{ question.category.name }}</td>
-                                <td>{{ 'qcm_core.question_level'|transchoice(question.level, { '%level%': question.level}) }}</td>
+                                <td>{{ question.level }}</td>
                                 <td>{{ ('qcm_core.label.' ~ question.type)|trans }}</td>
                                 <td>{{ 'qcm_core.enabled'|transchoice(question.enabled) }}</td>
                             </tr>
