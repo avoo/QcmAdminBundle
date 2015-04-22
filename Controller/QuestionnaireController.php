@@ -24,7 +24,9 @@ class QuestionnaireController extends Controller
         $userSession = $this->get('qcm_core.controller.user_session')->findOr404($request);
         $generator = $this->get('qcm_core.question.generator');
 
+        $userSession->getConfiguration()->eraseQuestions();
         $generator->generate($userSession);
+
         $configuration = clone $userSession->getConfiguration();
         $userSession->setConfiguration($configuration);
 
