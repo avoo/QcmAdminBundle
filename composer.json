@@ -4,6 +4,7 @@
     "type": "symfony-bundle",
     "require": {
         "php": ">=5.3.3",
+        "avoo/qcm-core-bundle": "~1.0",
         "willdurand/js-translation-bundle": "~2.1"
     },
     "require-dev": {
