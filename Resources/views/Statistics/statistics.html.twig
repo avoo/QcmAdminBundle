@@ -120,7 +120,7 @@
                             <div class="box-header with-border">
                                 <h4 class="box-title">
                                     <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{ loop.index }}" aria-expanded="false">
-                                        <div><small>{{ question.category.name }} - {{ 'qcm_admin.label.level'|trans ~ ' ' ~ question.level }}</small></div>{{ question.name }}
+                                        <div><small>{{ question.category.name }} - {{ 'qcm_admin.label.level'|trans ~ ' ' ~ question.level }}</small></div>{{ question.name|raw }}
                                     </a>
                                 </h4>
                             </div>

@@ -23,7 +23,7 @@
                         <tbody>
                         {% for question in questions %}
                             <tr>
-                                <td>{{ question.name }}</td>
+                                <td>{{ question.name|raw }}</td>
                                 <td>{{ question.category.name }}</td>
                                 <td>{{ ('qcm_core.label.' ~ question.type)|trans }}</td>
                                 <td>{{ 'qcm_core.enabled'|transchoice(question.enabled) }}</td>
@@ -61,7 +61,7 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>{{ question.name }}</td>
+                                <td>{{ question.name|raw }}</td>
                                 <td>{{ question.category.name }}</td>
                                 <td>{{ question.level }}</td>
                                 <td>{{ ('qcm_core.label.' ~ question.type)|trans }}</td>
