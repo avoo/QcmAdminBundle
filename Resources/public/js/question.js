@@ -32,7 +32,7 @@
 
     $.initAnswer = function (answersMax) {
         $('#add-answer').click(function() {
-            var answerCount = $('#answers_form button').length;
+            var answerCount = $('#answers_form textarea').length;
             var answerList = $('#question_form');
             var newWidget = answerList.attr('data-prototype');
 
