@@ -30,6 +30,7 @@ public function registerBundles()
 {
     return array(
         // ...
+        new Bazinga\Bundle\JsTranslationBundle\BazingaJsTranslationBundle(),
         new Qcm\Bundle\CoreBundle\QcmCoreBundle(),
         new Qcm\Bundle\AdminBundle\QcmAdminBundle(),
     );
