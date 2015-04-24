@@ -1,5 +1,6 @@
 {% macro list(categories) %}
     {% import '@QcmCore/Macros/actions.html.twig' as actions %}
+
     {% if categories|length == 0 %}
         <div class="text-muted text-center">{{ 'qcm_admin.empty.category'|trans }}</div>
     {% else %}
@@ -37,6 +38,8 @@
             </div>
         </div>
     </div>
+
+    {{ actions.pagination(categories) }}
     {% endif %}
 {% endmacro %}
 

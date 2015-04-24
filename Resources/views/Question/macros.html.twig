@@ -1,5 +1,6 @@
 {% macro list(questions) %}
     {% import '@QcmCore/Macros/actions.html.twig' as actions %}
+
     {% if questions|length == 0 %}
         <div class="text-muted text-center">{{ 'qcm_admin.empty.question'|trans }}</div>
     {% else %}
@@ -40,6 +41,7 @@
             </div>
         </div>
     </div>
+    {{ actions.pagination(questions) }}
     {% endif %}
 {% endmacro %}
 
