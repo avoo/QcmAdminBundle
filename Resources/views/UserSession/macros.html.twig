@@ -166,95 +166,74 @@
 {% endmacro %}
 
 {% macro show(user_session) %}
-<div class="row">
-    <div class="col-xs-12">
-        <div class="box box-primary">
-            <div class="box-body table-responsive no-padding">
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th>{{ 'qcm_core.label.username'|trans }}</th>
-                        <th>{{ 'qcm_core.label.email'|trans }}</th>
-                    </tr>
-                    </thead>
-                    <tbody>
+    {% from '@QcmAdmin/Question/macros.html.twig' import accordion %}
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box box-primary">
+                <div class="box-body table-responsive no-padding">
+                    <table class="table">
+                        <thead>
                         <tr>
-                            <td>{{ user_session.user.username }}</td>
-                            <td>
-                                <table class="table table-bordered">
-                                    {% if user_session.configuration.dateStart is not null %}
-                                        <tr>
-                                            <td>{{ 'qcm_admin.questionnaires.date_start'|trans }}</td>
-                                            <th>{{ user_session.configuration.dateStart.date|localizeddate }}</th>
-                                        </tr>
-                                    {% endif %}
-                                    {% if user_session.configuration.dateEnd is not null %}
-                                        <tr>
-                                            <td>{{ 'qcm_admin.questionnaires.date_end'|trans }}</td>
-                                            <th>{{ user_session.configuration.dateEnd.date|localizeddate }}</th>
-                                        </tr>
-                                    {% endif %}
-                                    <tr>
-                                        <td class="col-sm-3">{{ 'qcm_admin.title.categories'|trans }}</td>
-                                        <th>
-                                            {% for category in user_session.configuration.categories %}
-                                                {{ category.name }}{% if not loop.last %}, {% endif %}
-                                            {% endfor %}
-                                        </th>
-                                    </tr>
-                                    <tr>
-                                        {% if user_session.configuration.timeout is null %}
-                                        <td>{{ 'qcm_core.label.time_per_question'|trans }}</td>
-                                        <th>{{ user_session.configuration.timePerQuestion }} {{ 'qcm_admin.user_session.seconds'|trans }}</th>
-                                        {% else %}
-                                        <td>{{ 'qcm_core.label.timeout'|trans }}</td>
-                                        <th>{{ (user_session.configuration.timeout/60)|round }} {{ 'qcm_admin.user_session.minutes'|trans }}</th>
-                                        {% endif %}
-                                    </tr>
-                                    {% if user_session.configuration.startAt is not null %}
-                                        <tr>
-                                            <td>{{ 'qcm_admin.questionnaires.start_at'|trans }}</td>
-                                            <th>{{ user_session.configuration.startAt.date|localizeddate }}</th>
-                                        </tr>
-                                    {% endif %}
-                                    {% if user_session.configuration.endAt is not null %}
-                                        <tr>
-                                            <td>{{ 'qcm_admin.questionnaires.end_at'|trans }}</td>
-                                            <th>{{ user_session.configuration.endAt.date|localizeddate }}</th>
-                                        </tr>
-                                    {% endif %}
-                                </table>
-                            </td>
+                            <th>{{ 'qcm_core.label.username'|trans }}</th>
+                            <th>{{ 'qcm_core.label.email'|trans }}</th>
                         </tr>
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{ user_session.user.username }}</td>
+                                <td>
+                                    <table class="table table-bordered">
+                                        {% if user_session.configuration.dateStart is not null %}
+                                            <tr>
+                                                <td>{{ 'qcm_admin.questionnaires.date_start'|trans }}</td>
+                                                <th>{{ user_session.configuration.dateStart.date|localizeddate }}</th>
+                                            </tr>
+                                        {% endif %}
+                                        {% if user_session.configuration.dateEnd is not null %}
+                                            <tr>
+                                                <td>{{ 'qcm_admin.questionnaires.date_end'|trans }}</td>
+                                                <th>{{ user_session.configuration.dateEnd.date|localizeddate }}</th>
+                                            </tr>
+                                        {% endif %}
+                                        <tr>
+                                            <td class="col-sm-3">{{ 'qcm_admin.title.categories'|trans }}</td>
+                                            <th>
+                                                {% for category in user_session.configuration.categories %}
+                                                    {{ category.name }}{% if not loop.last %}, {% endif %}
+                                                {% endfor %}
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            {% if user_session.configuration.timeout is null %}
+                                            <td>{{ 'qcm_core.label.time_per_question'|trans }}</td>
+                                            <th>{{ user_session.configuration.timePerQuestion }} {{ 'qcm_admin.user_session.seconds'|trans }}</th>
+                                            {% else %}
+                                            <td>{{ 'qcm_core.label.timeout'|trans }}</td>
+                                            <th>{{ (user_session.configuration.timeout/60)|round }} {{ 'qcm_admin.user_session.minutes'|trans }}</th>
+                                            {% endif %}
+                                        </tr>
+                                        {% if user_session.configuration.startAt is not null %}
+                                            <tr>
+                                                <td>{{ 'qcm_admin.questionnaires.start_at'|trans }}</td>
+                                                <th>{{ user_session.configuration.startAt.date|localizeddate }}</th>
+                                            </tr>
+                                        {% endif %}
+                                        {% if user_session.configuration.endAt is not null %}
+                                            <tr>
+                                                <td>{{ 'qcm_admin.questionnaires.end_at'|trans }}</td>
+                                                <th>{{ user_session.configuration.endAt.date|localizeddate }}</th>
+                                            </tr>
+                                        {% endif %}
+                                    </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<h4>{{ 'qcm_admin.title.questions'|trans }}</h4>
-<div class="bs-example">
-    <div class="panel-group" id="accordion">
-        {% for question in user_session.configuration.questions %}
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{ loop.index }}">{{ loop.index }}. {{ question.category.name }}: {{ question.name|raw }}</a>
-                    </h4>
-                </div>
-                <div id="collapse{{ loop.index }}" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        <h4>{{ 'qcm_admin.title.answers'|trans }}</h4>
-                        {% for answer in question.answers %}
-                        <div class="panel panel-default">
-                            <div class="panel-body">{{ answer.value|raw }}</div>
-                        </div>
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
-        {% endfor %}
-    </div>
-</div>
+    {{ accordion(user_session.configuration.questions) }}
+
 {% endmacro %}

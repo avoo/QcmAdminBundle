@@ -84,3 +84,37 @@
         </div>
     </div>
 {% endmacro %}
+
+{% macro accordion(questions) %}
+    <h4>{{ 'qcm_admin.title.questions'|trans }}</h4>
+    {% if questions|length == 0 %}
+        <div class="text-muted text-center">{{ 'qcm_admin.empty.question'|trans }}</div>
+    {% else %}
+        <div class="bs-example">
+            <div class="panel-group" id="accordion">
+                {% for question in questions %}
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{ loop.index }}">
+                                    <div><small>{{ 'qcm_admin.label.level'|trans ~ ' ' ~ question.level }}</small></div>
+                                    {{ question.name|raw }}
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse{{ loop.index }}" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <h4>{{ 'qcm_admin.title.answers'|trans }}</h4>
+                                {% for answer in question.answers %}
+                                    <div class="panel panel-default">
+                                        <div class="panel-body">{{ answer.value|raw }}</div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+{% endmacro %}
