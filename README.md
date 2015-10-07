@@ -17,7 +17,7 @@ into your `composer.json` file:
 ``` json
 {
     "require": {
-        "avoo/qcm-admin-bundle": "@dev-master"
+        "avoo/qcm-admin-bundle": "dev-master"
     }
 }
 ```
