@@ -19,34 +19,43 @@
                 </div>
                 <div class="box-body">
                     <div class="row">
-                        <div class="col-md-4 text-center">
-                            <h4>{{ 'qcm_admin.statistics.percent'|trans }}</h4>
-                            <h2>{{ statistics.percentage }} <small>%</small></h2>
-                        </div>
-                        <div class="col-md-4 text-center">
-                            <h4>{{ 'qcm_admin.statistics.ratio'|trans }}</h4>
-                            <h2>{{ statistics.ratio }} <small>%</small></h2>
-                        </div>
-                        <div class="col-md-4">
-                            <h4 class="text-center">{{ 'qcm_admin.statistics.detail'|trans }}</h4>
-                            <table class="table">
-                                <tr>
-                                    <td>{{ 'qcm_admin.statistics.completed_in'|trans }}</td>
-                                    <td>{{ user_session.configuration.startAt.diff(user_session.configuration.endAt).format('%H h %I m %S s') }}</td>
-                                </tr>
-                                <tr>
-                                    <td>{{ 'qcm_admin.statistics.valid'|trans }}</td>
-                                    <td>{{ statistics.score.valid }}</td>
-                                </tr>
-                                <tr>
-                                    <td>{{ 'qcm_admin.statistics.incomplete'|trans }}</td>
-                                    <td>{{ statistics.score.partial }}</td>
-                                </tr>
-                                <tr>
-                                    <td>{{ 'qcm_admin.statistics.invalid'|trans }}</td>
-                                    <td>{{ statistics.score.not_valid }}</td>
-                                </tr>
-                            </table>
+                        <div class="col-md-12">
+                            <div class="col-md-6 text-center">
+                                <h4>{{ 'qcm_admin.statistics.percent_valid'|trans }}</h4>
+                                <h2>{{ statistics.percentage }} <small>%</small></h2>
+                                <hr />
+                            </div>
+                            <div class="col-md-6 text-center">
+                                <h4>{{ 'qcm_admin.statistics.ratio'|trans }}</h4>
+                                <h2>{{ statistics.ratio }} <small><sup>/1</sup></small></h2>
+                                <hr />
+                            </div>
+                            <div class="col-md-6 text-center">
+                                <h4>{{ 'qcm_admin.statistics.percent_valid_partial'|trans }}</h4>
+                                <h2>{{ statistics.percentagePartial }} <small>%</small></h2>
+                                <hr />
+                            </div>
+                            <div class="col-md-6">
+                                <h4 class="text-center">{{ 'qcm_admin.statistics.detail'|trans }}</h4>
+                                <table class="table">
+                                    <tr>
+                                        <td>{{ 'qcm_admin.statistics.completed_in'|trans }}</td>
+                                        <td>{{ user_session.configuration.startAt.diff(user_session.configuration.endAt).format('%H h %I m %S s') }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{ 'qcm_admin.statistics.valid'|trans }}</td>
+                                        <td>{{ statistics.score.valid }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{ 'qcm_admin.statistics.incomplete'|trans }}</td>
+                                        <td>{{ statistics.score.partial }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{ 'qcm_admin.statistics.invalid'|trans }}</td>
+                                        <td>{{ statistics.score.not_valid }}</td>
+                                    </tr>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -81,7 +90,7 @@
                     <div class="row">
                         {% for category in statistics.scoreByCategory %}
                             <div class="col-md-3 col-sm-6 col-xs-6 text-center">
-                                <input type="text" class="knob" value="{{ (category.valid/category.total)*100 }}" data-skin="tron"  data-thickness="0.2" data-width="120" data-height="120" data-fgColor="{{ category.color }}" data-readonly="true"/>
+                                <input type="text" class="knob" value="{{ ((category.valid/category.total)*100)|number_format(1) }}" data-skin="tron"  data-thickness="0.2" data-width="120" data-height="120" data-fgColor="{{ category.color }}" data-readonly="true"/>
                                 <div>{{ category.name }}</div>
                             </div>
                         {% endfor %}
@@ -99,8 +108,9 @@
                     <div class="row">
                         {% for level in statistics.scoreByLevel %}
                             <div class="col-md-3 col-sm-6 col-xs-6 text-center">
-                                <input type="text" class="knob" value="{{ (level.valid/level.total)*100 }}" data-skin="tron"  data-thickness="0.2" data-width="120" data-height="120" data-fgColor="{{ level.color }}" data-readonly="true"/>
+                                <input type="text" class="knob" value="{{ ((level.valid/level.total)*100)|number_format(1) }}" data-skin="tron"  data-thickness="0.2" data-width="120" data-height="120" data-fgColor="{{ level.color }}" data-readonly="true"/>
                                 <div>{{ 'qcm_admin.label.level'|trans ~ ' ' ~ level.name }}</div>
+                                <div>{{ level.valid ~ ' / ' ~ level.total }}</div>
                             </div>
                         {% endfor %}
                     </div>
@@ -120,7 +130,17 @@
                             <div class="box-header with-border">
                                 <h4 class="box-title">
                                     <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{ loop.index }}" aria-expanded="false">
-                                        <div><small>{{ question.category.name }} - {{ 'qcm_admin.label.level'|trans ~ ' ' ~ question.level }}</small></div>{{ question.name|raw }}
+                                        <div class="row col-md-12">
+                                            {% set validAnswer = false %}
+                                            {% if statistics.question(question.id).isValid %}
+                                                {% set validAnswer = true %}
+                                            {% endif %}
+                                            <span class="label label-{{ validAnswer ? 'success' : 'danger' }}" style="margin-right: 10px;">
+                                                <i class="fa fa-check"></i>
+                                            </span>
+                                            <small>{{ question.category.name }} - {{ 'qcm_admin.label.level'|trans ~ ' ' ~ question.level }}</small>
+                                        </div>
+                                        <div class="row col-md-12" style="margin-top: 20px;">{{ question.name|raw }}</div>
                                     </a>
                                 </h4>
                             </div>
@@ -143,7 +163,11 @@
                                                     {% if answer.isValid %}
                                                         {% set isValid = true %}
                                                         <span class="label label-success">
-                                                            <i class="fa fa-check"></i>
+                                                            {% if question.type == 'text' %}
+                                                                {{ answer.value }}
+                                                            {% else %}
+                                                                <i class="fa fa-check"></i>
+                                                            {% endif %}
                                                         </span>
                                                     {% endif %}
                                                 </td>
@@ -159,10 +183,10 @@
                                                         {% endfor %}
 
                                                         {% if exist == true %}
-                                                                <span class="label label-{{ isValid ? 'success' : 'danger' }}">
-                                                                    <i class="fa fa-check"></i>
-                                                                </span>
-                                                        {% elseif question.type == 'text' and user_session.configuration.answers.get(key) is not empty %}
+                                                            <span class="label label-{{ isValid ? 'success' : 'danger' }}">
+                                                                <i class="fa fa-check"></i>
+                                                            </span>
+                                                        {% elseif question.type == 'text' and user_session.configuration.answers.get(key) is not empty and user_session.configuration.answers.get(key).0 is defined %}
                                                             {{ user_session.configuration.answers.get(key).0 }}
                                                         {% endif%}
                                                     {% endif %}

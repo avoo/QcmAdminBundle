@@ -3,7 +3,7 @@
 namespace Qcm\Bundle\AdminBundle\Statistics;
 
 use Qcm\Bundle\CoreBundle\Statistics\Model\QuestionnaireStatistics as BaseQuestionnaireStatistics;
-use Qcm\Bundle\CoreBundle\Statistics\Model\TemplateInterface;
+use Qcm\Component\Statistics\Model\TemplateInterface;
 
 /**
  * Class QuestionnaireStatistics
@@ -54,12 +54,15 @@ class QuestionnaireStatistics extends BaseQuestionnaireStatistics
         /** @var TemplateInterface $template */
         foreach ($this->getData() as $template) {
             $question = $template->getQuestion();
-            $levels[$question->getLevel()] = array(
-                'name' => $question->getLevel(),
-                'valid' => 0,
-                'total' => 0,
-                'color' => '#' . substr('00000' . dechex(mt_rand(0, 0xffffff)), -6)
-            );
+
+            if (!isset($levels[$question->getLevel()])) {
+                $levels[$question->getLevel()] = array(
+                    'name' => $question->getLevel(),
+                    'valid' => 0,
+                    'total' => 0,
+                    'color' => '#'.substr('00000'.dechex(mt_rand(0, 0xffffff)), -6)
+                );
+            }
 
             if ($template->isValid()) {
                 $levels[$question->getLevel()]['valid']++;
@@ -80,11 +83,29 @@ class QuestionnaireStatistics extends BaseQuestionnaireStatistics
      */
     public function getPercentage()
     {
-        $total = $this->score->getValid() +
-            $this->score->getPartial() +
-            $this->score->getNotValid();
+        $total = $this->getTotal();
 
         return round(($this->score->getValid()/$total) * 100);
+    }
+
+    /**
+     * Get percentage valid + partial
+     */
+    public function getPercentagePartial()
+    {
+        $total = $this->getTotal();
+
+        return round((($this->score->getValid() + $this->score->getPartial())/$total) * 100);
+    }
+
+    /**
+     * Get total answers
+     *
+     * @return integer
+     */
+    public function getTotal()
+    {
+        return $this->score->getValid() + $this->score->getPartial() + $this->score->getNotValid();
     }
 
     /**

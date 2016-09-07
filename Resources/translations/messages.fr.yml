@@ -100,7 +100,8 @@ qcm_admin:
         title: Statistiques
         questions_by_category: Questions par catégories
         score: Score
-        percent: Pourcentage
+        percent_valid: Pourcentage (valide)
+        percent_valid_partial: Pourcentage (valide + incomplet)
         ratio: Ratio
         detail: Détail
         completed_in: Complété en
